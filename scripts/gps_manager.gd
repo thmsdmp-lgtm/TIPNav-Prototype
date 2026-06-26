@@ -48,8 +48,8 @@ func _on_gps_success(args: Array) -> void:
 	var longitude = coords.longitude
 	var accuracy = coords.accuracy
 	
-	latLabel.text = latitude
-	longLabel.text = longitude
+	latLabel.text = str(latitude)
+	longLabel.text = str(longitude)
 	print("Latitude: ", latitude)
 	print("Longitude: ", longitude)
 	print("Accuracy (meters): ", accuracy)
