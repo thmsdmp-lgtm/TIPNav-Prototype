@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cii0h5k4um7d8"
-path="res://.godot/imported/TIPNav Prototype.png-b201eb4834aa18b265a1f8da555aaf16.ctex"
+uid="uid://uh6hxlyhsgx6"
+path="res://.godot/imported/index.icon.png-5665fad188e88d1e882500a4376bfe02.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://build/TIPNav Prototype.png"
-dest_files=["res://.godot/imported/TIPNav Prototype.png-b201eb4834aa18b265a1f8da555aaf16.ctex"]
+source_file="res://index.icon.png"
+dest_files=["res://.godot/imported/index.icon.png-5665fad188e88d1e882500a4376bfe02.ctex"]
 
 [params]
 
