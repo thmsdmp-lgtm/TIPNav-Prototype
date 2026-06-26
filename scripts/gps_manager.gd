@@ -22,10 +22,12 @@ func request_gps_location() -> void:
 	var window = JavaScriptBridge.get_interface("window")
 	if not window:
 		print("Failed to get window interface.")
+		latLabel.text = "FAILED TO GET WINDOW"
 		return
 		
 	var navigator = window.navigator
 	if not navigator or not navigator.geolocation:
+		latLabel.text = "FAILED TO GET GPS OR NOT SUPPORTED"
 		print("Geolocation is not supported by this browser.")
 		return
 	
