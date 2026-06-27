@@ -31,3 +31,18 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "LATITUDE"
 horizontal_alignment = 1
+
+[node name="Alt" type="Label" parent="userInterface/CanvasLayer/Container" unique_id=2125977871]
+layout_mode = 2
+text = "ALTITUDE"
+horizontal_alignment = 1
+
+[node name="PosAcc" type="Label" parent="userInterface/CanvasLayer/Container" unique_id=1275106513]
+layout_mode = 2
+text = "POS ACC"
+horizontal_alignment = 1
+
+[node name="AltAcc" type="Label" parent="userInterface/CanvasLayer/Container" unique_id=329105579]
+layout_mode = 2
+text = "ALT ACC"
+horizontal_alignment = 1

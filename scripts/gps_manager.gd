@@ -6,6 +6,10 @@ var _error_callback_ref: JavaScriptObject
 
 @onready var latLabel = $"../userInterface/CanvasLayer/Container/Lat"
 @onready var longLabel = $"../userInterface/CanvasLayer/Container/Long"
+@onready var altLabel = $"../userInterface/CanvasLayer/Container/Alt"
+
+@onready var posAccLabel = $"../userInterface/CanvasLayer/Container/PosAcc"
+@onready var altAccLabel = $"../userInterface/CanvasLayer/Container/AltAcc"
 
 # We will use a dedicated timer instead of _process
 var update_timer: Timer
@@ -57,13 +61,18 @@ func _on_gps_success(args: Array) -> void:
 	
 	var latitude = coords.latitude
 	var longitude = coords.longitude
-	var accuracy = coords.accuracy
+	var posAccuracy = coords.accuracy
 	
-	latLabel.text = str(latitude)
-	longLabel.text = str(longitude)
-	print("SUCCESS! Lat: ", latitude, " | Long: ", longitude, " | Accuracy: ", accuracy)
-
+	var altitude = coords.altitude
+	var altAccuracy = coords.altitudeAccuracy
+	
+	latLabel.text = str("LATIUDE: ",latitude)
+	longLabel.text = str("LONGITUDE: ",longitude)
+	altLabel.text = str("ALTITUDE: ",altitude)
+	
+	posAccLabel.text = str("POSITION ACCURACY: ",posAccuracy)
+	altAccLabel.text = str("ALTITUDE ACCURACY: ",altAccuracy)
+	
 func _on_gps_error(args: Array) -> void:
 	var error = args[0]
-	latLabel.text = "GPS ERROR: " + str(error.code)
 	print("GPS Error code: ", error.code, " | Message: ", error.message)
