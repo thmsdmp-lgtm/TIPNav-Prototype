@@ -39,7 +39,7 @@ func request_gps_location():
 	var window = JavaScriptBridge.get_interface("window")
 	if not window:
 		print("Failed to get window interface.")
-		latLabel.text = "FAILED TO GET WINDOW"
+		startButton.text = "FAILED TO GET WINDOW"
 		return
 		
 	var navigator = window.navigator
@@ -97,6 +97,9 @@ func _on_gps_error(args: Array):
 
 func _on_start_button_pressed() -> void:
 	if OS.has_feature("web"):
+		_success_callback_ref = JavaScriptBridge.create_callback(_on_gps_success)
+		_error_callback_ref = JavaScriptBridge.create_callback(_on_gps_error)
+		
 		var result = await check_gps_access()
 		var gps_access = result[0]
 		var err_code = result[1]
@@ -108,9 +111,6 @@ func _on_start_button_pressed() -> void:
 		
 		startButton.visible = false
 		labelContainer.visible = true
-		
-		_success_callback_ref = JavaScriptBridge.create_callback(_on_gps_success)
-		_error_callback_ref = JavaScriptBridge.create_callback(_on_gps_error)
 		
 		# Setup a safe loop using a real Timer node
 		update_timer = Timer.new()
