@@ -1,5 +1,4 @@
 extends Node
-
 class_name GpsManager
 
 # Hold references to the callbacks so they are not garbage collected
@@ -19,13 +18,22 @@ var _error_callback_ref: JavaScriptObject
 # We will use a dedicated timer instead of _process
 var update_timer: Timer
 
+signal on_gps_err(error_code)
+
 func _ready() -> void:
 	pass
 
-func request_gps_location() -> void:
-	if !labelContainer.visible:
-		return
+func check_gps_access():
+	request_gps_location()
 	
+	var err = await on_gps_err
+	
+	if err:
+		return [false,err]
+	else:
+		return [true, null]
+
+func request_gps_location():
 	print("Attempting to fetch GPS...") 
 	
 	var window = JavaScriptBridge.get_interface("window")
@@ -36,7 +44,6 @@ func request_gps_location() -> void:
 		
 	var navigator = window.navigator
 	if not navigator or not navigator.geolocation:
-		latLabel.text = "FAILED TO GET GPS"
 		print("Geolocation is not supported or blocked by browser security.")
 		return
 	
@@ -49,6 +56,8 @@ func request_gps_location() -> void:
 	navigator.geolocation.getCurrentPosition(_success_callback_ref, _error_callback_ref, options)
 
 func _on_gps_success(args: Array) -> void:
+	on_gps_err.emit(false)
+	
 	var position = args[0]
 	var coords = position.coords
 	
@@ -65,12 +74,14 @@ func _on_gps_success(args: Array) -> void:
 	
 	posAccLabel.text = str("POSITION ACCURACY: ", posAccuracy)
 	altAccLabel.text = str("ALTITUDE ACCURACY: ", altAccuracy)
-	
-func _on_gps_error(args: Array) -> void:
+
+func _on_gps_error(args: Array):
 	var error = args[0]
 	var error_code = error.code
 	var error_message = error.message
 	print("GPS Error code: ", error_code, " | Message: ", error_message)
+	
+	on_gps_err.emit(error_code)
 	
 	# Let the user know exactly WHY it's failing
 	if error_code == 1: # PERMISSION_DENIED
@@ -89,6 +100,15 @@ func _on_start_button_pressed() -> void:
 	labelContainer.visible = true
 	
 	if OS.has_feature("web"):
+		var result = await check_gps_access()
+		var gps_access = result[0]
+		var err_code = result[1]
+		
+		if !gps_access and err_code:
+			if err_code == 1:
+				startButton.text = "TURN ON GPS ACCESS"
+			return
+		
 		_success_callback_ref = JavaScriptBridge.create_callback(_on_gps_success)
 		_error_callback_ref = JavaScriptBridge.create_callback(_on_gps_error)
 		
