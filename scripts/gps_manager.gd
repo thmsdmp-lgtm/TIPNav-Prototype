@@ -22,6 +22,14 @@ var _watch_id := -1
 var window
 var navigator
 
+# local pos var
+var position = {
+	"latitude":0,
+	"longitude":0,
+	"altitude":0,
+	"accuracy":0
+}
+
 # error and success signal when fetching data
 signal gps_signal(val)
 
@@ -87,15 +95,20 @@ func stop_gps():
 func _on_gps_success(args: Array) -> void:
 	gps_signal.emit(true,null)
 
-	var position = args[0]
-	var coords = position.coords
+	var posdata = args[0]
+	var coords = posdata.coords
+	
+	position.latitude = coords.latitude
+	position.longitude = coords.longitude
+	position.altitude = coords.altitude
+	position.accuracy = coords.accuracy
+	
+	latLabel.text = "LATITUDE: " + str(position.latitude)
+	longLabel.text = "LONGITUDE: " + str(position.longitude)
+	altLabel.text = "ALTITUDE: " + str(position.altitude)
 
-	latLabel.text = "LATITUDE: " + str(coords.latitude)
-	longLabel.text = "LONGITUDE: " + str(coords.longitude)
-	altLabel.text = "ALTITUDE: " + str(coords.altitude)
-
-	posAccLabel.text = "POSITION ACCURACY: " + str(coords.accuracy)
-	altAccLabel.text = "ALTITUDE ACCURACY: " + str(coords.altitudeAccuracy)
+	posAccLabel.text = "POSITION ACCURACY: " + str(position.accuracy)
+	altAccLabel.text = "ALTITUDE ACCURACY: " + str(position.altitudeAccuracy)
 
 	print("GPS Updated")
 
@@ -104,7 +117,14 @@ func _on_gps_error(args: Array) -> void:
 	
 	gps_signal.emit(false,error.code)
 	print("GPS Error:", error.code, error.message)
+	
+	latLabel.text = "LATITUDE: --"
+	longLabel.text = "LONGITUDE: --"
+	altLabel.text = "ALTITUDE: --"
 
+	posAccLabel.text = "POSITION ACCURACY: --"
+	altAccLabel.text = "ALTITUDE ACCURACY: --"
+	
 	match int(error.code):
 		1:
 			startButton.visible = true
