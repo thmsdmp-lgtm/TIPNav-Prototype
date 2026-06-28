@@ -96,9 +96,6 @@ func _on_gps_error(args: Array):
 		latLabel.text = "ERROR: Location request timed out."
 
 func _on_start_button_pressed() -> void:
-	startButton.visible = false
-	labelContainer.visible = true
-	
 	if OS.has_feature("web"):
 		var result = await check_gps_access()
 		var gps_access = result[0]
@@ -108,6 +105,9 @@ func _on_start_button_pressed() -> void:
 			if err_code == 1:
 				startButton.text = "TURN ON GPS ACCESS"
 			return
+		
+		startButton.visible = false
+		labelContainer.visible = true
 		
 		_success_callback_ref = JavaScriptBridge.create_callback(_on_gps_success)
 		_error_callback_ref = JavaScriptBridge.create_callback(_on_gps_error)
@@ -122,6 +122,5 @@ func _on_start_button_pressed() -> void:
 		# Fire once immediately
 		request_gps_location()
 	else:
-		latLabel.text = "NOT ON BROWSER"
-		longLabel.text = "NOT ON BROWSER"
+		startButton.text = "NOT ON BROWSER"
 		print("GPS retrieval via JavaScriptBridge is only supported on Web builds.")
