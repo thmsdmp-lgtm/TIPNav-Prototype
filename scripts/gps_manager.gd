@@ -5,6 +5,9 @@ class_name GpsManager
 var _success_callback_ref: JavaScriptObject
 var _error_callback_ref: JavaScriptObject
 
+# ID returned by watchPosition()
+var _watch_id := -1
+
 @onready var labelContainer = $"../userInterface/CanvasLayer/Container"
 @onready var startButton = $"../userInterface/CanvasLayer/StartButton"
 
@@ -15,112 +18,112 @@ var _error_callback_ref: JavaScriptObject
 @onready var posAccLabel = $"../userInterface/CanvasLayer/Container/PosAcc"
 @onready var altAccLabel = $"../userInterface/CanvasLayer/Container/AltAcc"
 
-# We will use a dedicated timer instead of _process
-var update_timer: Timer
-
-signal on_gps_err(error_code)
-
 func _ready() -> void:
 	pass
 
-func check_gps_access():
-	request_gps_location()
-	
-	var err = await on_gps_err
-	
-	if err:
-		return [false,err]
-	else:
-		return [true, null]
 
-func request_gps_location():
-	print("Attempting to fetch GPS...") 
-	
+func start_gps():
+	print("Starting GPS watch...")
+
 	var window = JavaScriptBridge.get_interface("window")
-	if not window:
-		print("Failed to get window interface.")
+	if window == null:
 		startButton.text = "FAILED TO GET WINDOW"
 		return
-		
+
 	var navigator = window.navigator
-	if not navigator or not navigator.geolocation:
-		print("Geolocation is not supported or blocked by browser security.")
+	if navigator == null:
+		startButton.text = "NO NAVIGATOR"
 		return
-	
+
+	if navigator.geolocation == null:
+		startButton.text = "NO GEOLOCATION"
+		return
+
 	var options = JavaScriptBridge.create_object("Object")
 	options.enableHighAccuracy = true
-	options.timeout = 5000
+	options.timeout = 10000
 	options.maximumAge = 0
-	
-	# Using watchPosition is usually better for continuous tracking than looping getCurrentPosition
-	navigator.geolocation.getCurrentPosition(_success_callback_ref, _error_callback_ref, options)
+
+	_watch_id = navigator.geolocation.watchPosition(
+		_success_callback_ref,
+		_error_callback_ref,
+		options
+	)
+
+	print("GPS Watch Started:", _watch_id)
+
+
+func stop_gps():
+	if _watch_id == -1:
+		return
+
+	var window = JavaScriptBridge.get_interface("window")
+	if window:
+		window.navigator.geolocation.clearWatch(_watch_id)
+
+	print("GPS Watch Stopped")
+
+	_watch_id = -1
+
 
 func _on_gps_success(args: Array) -> void:
-	on_gps_err.emit(false)
-	
 	var position = args[0]
 	var coords = position.coords
-	
-	var latitude = coords.latitude
-	var longitude = coords.longitude
-	var posAccuracy = coords.accuracy
-	
-	var altitude = coords.altitude
-	var altAccuracy = coords.altitudeAccuracy
-	
-	latLabel.text = str("LATITUDE: ", latitude)
-	longLabel.text = str("LONGITUDE: ", longitude)
-	altLabel.text = str("ALTITUDE: ", altitude)
-	
-	posAccLabel.text = str("POSITION ACCURACY: ", posAccuracy)
-	altAccLabel.text = str("ALTITUDE ACCURACY: ", altAccuracy)
 
-func _on_gps_error(args: Array):
+	latLabel.text = "LATITUDE: " + str(coords.latitude)
+	longLabel.text = "LONGITUDE: " + str(coords.longitude)
+	altLabel.text = "ALTITUDE: " + str(coords.altitude)
+
+	posAccLabel.text = "POSITION ACCURACY: " + str(coords.accuracy)
+	altAccLabel.text = "ALTITUDE ACCURACY: " + str(coords.altitudeAccuracy)
+
+	print("GPS Updated")
+
+
+func _on_gps_error(args: Array) -> void:
 	var error = args[0]
-	var error_code = error.code
-	var error_message = error.message
-	print("GPS Error code: ", error_code, " | Message: ", error_message)
-	
-	on_gps_err.emit(error_code)
-	
-	# Let the user know exactly WHY it's failing
-	if error_code == 1: # PERMISSION_DENIED
-		latLabel.text = "ERROR: Permission Denied. Please allow location access."
-	elif error_code == 2: # POSITION_UNAVAILABLE
-		latLabel.text = "ERROR: GPS Hardware is turned OFF or unavailable."
-		# Optional: Prompt them via browser alert
-		var window = JavaScriptBridge.get_interface("window")
-		if window:
-			window.alert("Please enable GPS/Location settings on your device.")
-	elif error_code == 3: # TIMEOUT
-		latLabel.text = "ERROR: Location request timed out."
+
+	print("GPS Error:", error.code, error.message)
+
+	match int(error.code):
+		1:
+			startButton.visible = true
+			startButton.text = "ALLOW LOCATION ACCESS"
+
+		2:
+			startButton.visible = true
+			startButton.text = "TURN ON GPS"
+
+			var window = JavaScriptBridge.get_interface("window")
+			if window:
+				window.alert("Please enable GPS/Location Services on your device.")
+
+		3:
+			startButton.visible = true
+			startButton.text = "GPS TIMED OUT"
+
+		_:
+			startButton.visible = true
+			startButton.text = "GPS ERROR"
+
 
 func _on_start_button_pressed() -> void:
-	if OS.has_feature("web"):
-		_success_callback_ref = JavaScriptBridge.create_callback(_on_gps_success)
-		_error_callback_ref = JavaScriptBridge.create_callback(_on_gps_error)
-		
-		var result = await check_gps_access()
-		var gps_access = result[0]
-		var err_code = result[1]
-		
-		if !gps_access and err_code:
-			if err_code == 1:
-				startButton.text = "TURN ON GPS ACCESS"
-			return
-		
-		startButton.visible = false
-		labelContainer.visible = true
-		
-		# Setup a safe loop using a real Timer node
-		update_timer = Timer.new()
-		update_timer.wait_time = 2.0 # Increased wait time; 0.5s is too aggressive for hardware GPS locks
-		update_timer.autostart = true
-		update_timer.timeout.connect(request_gps_location)
-		add_child(update_timer)
-		
-		# Fire once immediately
-		request_gps_location()
-	else:
-		startButton.text = "NOT ON BROWSER"
-		print("GPS retrieval via JavaScriptBridge is only supported on Web builds.")
+	if !OS.has_feature("web"):
+		startButton.text = "NOT ON WEB"
+		return
+
+	# Prevent creating multiple watches
+	if _watch_id != -1:
+		return
+
+	_success_callback_ref = JavaScriptBridge.create_callback(_on_gps_success)
+	_error_callback_ref = JavaScriptBridge.create_callback(_on_gps_error)
+
+	startButton.visible = false
+	labelContainer.visible = true
+
+	start_gps()
+
+
+func _exit_tree():
+	stop_gps()
