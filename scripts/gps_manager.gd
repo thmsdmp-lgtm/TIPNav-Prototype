@@ -1,5 +1,7 @@
 extends Node
 
+class_name GpsManager
+
 # Hold references to the callbacks so they are not garbage collected
 var _success_callback_ref: JavaScriptObject
 var _error_callback_ref: JavaScriptObject
