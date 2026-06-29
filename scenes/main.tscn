@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://scripts/gps_manager.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://dlss7b27bujgg" path="res://scripts/start_button.gd" id="2_sugp2"]
-[ext_resource type="Script" uid="uid://c18v6ws2r5hoe" path="res://scripts/avatar_positioning.gd" id="3_jyhfs"]
+[ext_resource type="Script" uid="uid://c18v6ws2r5hoe" path="res://scripts/user_controller.gd" id="3_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://cwylop8ncukfd" path="res://textures/grid.png" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://cflm6pmpd1jk" path="res://scenes/cam_controller.gd" id="4_tefeu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1vivr"]
 
@@ -83,9 +84,9 @@ text = "START"
 script = ExtResource("2_sugp2")
 
 [node name="SCENE" type="Node3D" parent="." unique_id=1800848481]
-script = ExtResource("3_jyhfs")
 
 [node name="User" type="CharacterBody3D" parent="SCENE" unique_id=1681251705]
+script = ExtResource("3_jyhfs")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SCENE/User" unique_id=1610220714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -95,7 +96,10 @@ mesh = SubResource("CapsuleMesh_1vivr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_1vivr")
 
-[node name="Camera3D" type="Camera3D" parent="SCENE/User" unique_id=1718871245]
+[node name="CamAnchor" type="Node3D" parent="SCENE/User" unique_id=1749368035]
+script = ExtResource("4_tefeu")
+
+[node name="Camera3D" type="Camera3D" parent="SCENE/User/CamAnchor" unique_id=1718871245]
 transform = Transform3D(1, 0, 0, 0, 0.64406115, 0.764974, 0, -0.764974, 0.64406115, 0, 16.230656, 12.726114)
 fov = 60.0
 

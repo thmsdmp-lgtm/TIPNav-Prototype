@@ -1,10 +1,11 @@
 extends Node3D
 
 # instances
-@onready var user_avatar = $User
+@onready var user_avatar = $"."
 
 # constants
 const EARTH_RADIUS = 6378137.0 # meters
+const  movement_threshold = 1 # meters
 
 # variables
 var active = false
@@ -37,6 +38,10 @@ func _physics_process(delta: float) -> void:
 	
 	var gps_pos = %gpsManager.position
 	var game_pos =  latlon_to_meters(gps_pos.latitude,gps_pos.longitude)
-	user_avatar.position = lerp(user_avatar.position,Vector3(game_pos.x,0,game_pos.y),delta*5)
+	
+	if game_pos.length() < movement_threshold:
+		return
+	
+	user_avatar.position = lerp(user_avatar.position,Vector3(game_pos.x,0,game_pos.y),delta*2.5)
 	print(user_avatar.position)
 	print(lat0,lon0)
