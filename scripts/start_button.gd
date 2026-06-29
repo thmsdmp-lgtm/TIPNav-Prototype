@@ -32,6 +32,11 @@ func _on_pressed() -> void:
 	
 	var heading_result = await %headingManager.error_occurred
 	
+	if !heading_result:
+		startButton.text = "HEADINGMANAGER FAILED TO INITIALIZE"
+	if !gps_result[0]:
+		startButton.text = "GPSMANAGER FAILED TO INITIALIZE"
+	
 	if heading_result and gps_result[0]:
 		startButton.visible = false
 		labelContainer.visible = true
