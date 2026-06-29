@@ -5,7 +5,7 @@ extends Node3D
 
 # constants
 const EARTH_RADIUS = 6378137.0 # meters
-const  movement_threshold = 1 # meters
+const  movement_threshold = .25 # meters
 
 # variables
 var active = false
