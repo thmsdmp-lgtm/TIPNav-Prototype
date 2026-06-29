@@ -28,18 +28,14 @@ func _on_pressed() -> void:
 	var gps_result = await  %gpsManager.gps_signal
 	
 	# start tracking heading
-	%headingManager.start_watching_heading()
+	%headingManager.start_watching()
 	
-	var heading_result = await %headingManager.error_occurred
-	
-	if !heading_result:
-		startButton.text = "HEADINGMANAGER FAILED TO INITIALIZE"
 	if !gps_result[0]:
 		startButton.text = "GPSMANAGER FAILED TO INITIALIZE"
 	
-	if heading_result and gps_result[0]:
+	if gps_result[0]:
 		startButton.visible = false
 		labelContainer.visible = true
 	else:
-		%headingManager.stop_watching_heading()
+		%headingManager.stop_watching()
 		%gpsManager.stop_watching_gps()
