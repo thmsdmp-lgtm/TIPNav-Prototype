@@ -1,28 +1,22 @@
 extends Node
 class_name GpsManager
 
-# Hold references to the callbacks so they are not garbage collected
-var _success_callback_ref: JavaScriptObject
-var _error_callback_ref: JavaScriptObject
-
 # ID returned by watchPosition()
 var _watch_id := -1
 
-@onready var labelContainer = $"../userInterface/CanvasLayer/Container"
-@onready var startButton = $"../userInterface/CanvasLayer/StartButton"
-
-@onready var latLabel = $"../userInterface/CanvasLayer/Container/Lat"
-@onready var longLabel = $"../userInterface/CanvasLayer/Container/Long"
-@onready var altLabel = $"../userInterface/CanvasLayer/Container/Alt"
-
-@onready var posAccLabel = $"../userInterface/CanvasLayer/Container/PosAcc"
-@onready var altAccLabel = $"../userInterface/CanvasLayer/Container/AltAcc"
+@onready var labelContainer = $"../UI/CanvasLayer/Container"
+@onready var startButton = $"../UI/CanvasLayer/StartButton"
+@onready var latLabel = $"../UI/CanvasLayer/Container/Lat"
+@onready var longLabel = $"../UI/CanvasLayer/Container/Long"
+@onready var altLabel = $"../UI/CanvasLayer/Container/Alt"
+@onready var posAccLabel = $"../UI/CanvasLayer/Container/PosAcc"
 
 # local vars for window and nav
 var window
 var navigator
 
-# local pos var
+# class variables
+var direction = 0
 var position = {
 	"latitude":0,
 	"longitude":0,
@@ -30,13 +24,20 @@ var position = {
 	"accuracy":0
 }
 
+# Hold references to the callbacks so they are not garbage collected
+var _success_callback_ref: JavaScriptObject
+var _error_callback_ref: JavaScriptObject
+
+# signals
 # error and success signal when fetching data
 signal gps_signal(val)
+signal gps_changed(args)
 
 func _ready() -> void:
-	pass
+	_success_callback_ref = JavaScriptBridge.create_callback(_on_gps_success)
+	_error_callback_ref = JavaScriptBridge.create_callback(_on_gps_error)
 
-func check_access():
+func check_gps_access():
 	
 	var options = JavaScriptBridge.create_object("Object")
 	options.enableHighAccuracy = true
@@ -51,9 +52,30 @@ func check_access():
 	
 	return [access,err]
 
-func start_gps():
+func start_watching_gps():
+	if !OS.has_feature("web"):
+		startButton.text = "NOT ON WEB"
+		return
+	
+	window = JavaScriptBridge.get_interface("window")
+	navigator = window.navigator
+	
+	var access = await check_gps_access()
+	if not access[0]:
+		window = JavaScriptBridge.get_interface("window")
+		if window:
+			window.alert("Please enable GPS/Location Services on your device.")
+		return
+	
+	# Prevent creating multiple watches
+	if _watch_id != -1:
+		return
+	
+	startButton.visible = false
+	labelContainer.visible = true
+		
 	print("Starting GPS watch...")
-
+	
 	if window == null:
 		startButton.text = "FAILED TO GET WINDOW"
 		return
@@ -76,14 +98,14 @@ func start_gps():
 		_error_callback_ref,
 		options
 	)
-
+	
 	print("GPS Watch Started:", _watch_id)
 
 
-func stop_gps():
+func stop_watching_gps():
 	if _watch_id == -1:
 		return
-
+	
 	window = JavaScriptBridge.get_interface("window")
 	if window:
 		window.navigator.geolocation.clearWatch(_watch_id)
@@ -94,7 +116,7 @@ func stop_gps():
 
 func _on_gps_success(args: Array) -> void:
 	gps_signal.emit(true,null)
-
+	
 	var posdata = args[0]
 	var coords = posdata.coords
 	
@@ -103,12 +125,13 @@ func _on_gps_success(args: Array) -> void:
 	position.altitude = coords.altitude
 	position.accuracy = coords.accuracy
 	
+	gps_changed.emit(position)
+	
 	latLabel.text = "LATITUDE: " + str(position.latitude)
 	longLabel.text = "LONGITUDE: " + str(position.longitude)
 	altLabel.text = "ALTITUDE: " + str(position.altitude)
 
 	posAccLabel.text = "POSITION ACCURACY: " + str(position.accuracy)
-	altAccLabel.text = "ALTITUDE ACCURACY: " + str(position.altitudeAccuracy)
 
 	print("GPS Updated")
 
@@ -121,57 +144,24 @@ func _on_gps_error(args: Array) -> void:
 	latLabel.text = "LATITUDE: --"
 	longLabel.text = "LONGITUDE: --"
 	altLabel.text = "ALTITUDE: --"
-
+	
 	posAccLabel.text = "POSITION ACCURACY: --"
-	altAccLabel.text = "ALTITUDE ACCURACY: --"
 	
 	match int(error.code):
 		1:
-			startButton.visible = true
-			startButton.text = "ALLOW LOCATION ACCESS"
+			print("ALLOW LOCATION ACCESS")
 			window = JavaScriptBridge.get_interface("window")
 			if window:
 				window.alert("Please enable GPS/Location Services on your device.")
 		2:
-			startButton.visible = true
-			startButton.text = "TURN ON GPS"
-
+			print("TURN ON GPS")
 			window = JavaScriptBridge.get_interface("window")
 			if window:
 				window.alert("Please enable GPS/Location Services on your device.")
-
 		3:
-			startButton.visible = true
-			startButton.text = "GPS TIMED OUT"
-
+			print("GPS TIMED OUT")
 		_:
-			startButton.visible = true
-			startButton.text = "GPS ERROR"
-
-func _on_start_button_pressed() -> void:
-	if !OS.has_feature("web"):
-		startButton.text = "NOT ON WEB"
-		return
-	
-	window = JavaScriptBridge.get_interface("window")
-	navigator = window.navigator
-
-	_success_callback_ref = JavaScriptBridge.create_callback(_on_gps_success)
-	_error_callback_ref = JavaScriptBridge.create_callback(_on_gps_error)
-	
-	var access = await check_access()
-	if not access[0]:
-		return
-	
-	# Prevent creating multiple watches
-	if _watch_id != -1:
-		return
-	
-	startButton.visible = false
-	labelContainer.visible = true
-
-	start_gps()
-
+			print("GPS ERROR")
 
 func _exit_tree():
-	stop_gps()
+	stop_watching_gps()

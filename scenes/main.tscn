@@ -1,17 +1,20 @@
 [gd_scene format=3 uid="uid://bta4ob2u1655v"]
 
 [ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://scripts/gps_manager.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://djmvnuombbq1g" path="res://scripts/heading_manager.gd" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://dlss7b27bujgg" path="res://scripts/start_button.gd" id="2_sugp2"]
 
-[node name="Node" type="Node" unique_id=1886722283]
+[node name="Main" type="Node" unique_id=1886722283]
 
 [node name="gpsManager" type="Node" parent="." unique_id=488604117]
+unique_name_in_owner = true
 script = ExtResource("1_o5qli")
 
-[node name="userInterface" type="Node2D" parent="." unique_id=253335189]
+[node name="UI" type="Node2D" parent="." unique_id=253335189]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="userInterface" unique_id=841797601]
+[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=841797601]
 
-[node name="Container" type="VBoxContainer" parent="userInterface/CanvasLayer" unique_id=1387178276]
+[node name="Container" type="VBoxContainer" parent="UI/CanvasLayer" unique_id=1387178276]
 visible = false
 anchors_preset = -1
 anchor_left = 0.25
@@ -22,33 +25,29 @@ offset_right = 40.0
 offset_bottom = 43.11499
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
-[node name="Lat" type="Label" parent="userInterface/CanvasLayer/Container" unique_id=581806648]
+[node name="Lat" type="Label" parent="UI/CanvasLayer/Container" unique_id=581806648]
 layout_mode = 2
 text = "LATITUDE"
 horizontal_alignment = 1
 
-[node name="Long" type="Label" parent="userInterface/CanvasLayer/Container" unique_id=701958305]
+[node name="Long" type="Label" parent="UI/CanvasLayer/Container" unique_id=701958305]
 layout_mode = 2
 text = "LATITUDE"
 horizontal_alignment = 1
 
-[node name="Alt" type="Label" parent="userInterface/CanvasLayer/Container" unique_id=2125977871]
+[node name="Alt" type="Label" parent="UI/CanvasLayer/Container" unique_id=2125977871]
 layout_mode = 2
 text = "ALTITUDE"
 horizontal_alignment = 1
 
-[node name="PosAcc" type="Label" parent="userInterface/CanvasLayer/Container" unique_id=1275106513]
+[node name="PosAcc" type="Label" parent="UI/CanvasLayer/Container" unique_id=1275106513]
 layout_mode = 2
 text = "POS ACC"
 horizontal_alignment = 1
 
-[node name="AltAcc" type="Label" parent="userInterface/CanvasLayer/Container" unique_id=329105579]
-layout_mode = 2
-text = "ALT ACC"
-horizontal_alignment = 1
-
-[node name="StartButton" type="Button" parent="userInterface/CanvasLayer" unique_id=2014055616]
+[node name="StartButton" type="Button" parent="UI/CanvasLayer" unique_id=2014055616]
 anchors_preset = -1
 anchor_left = 0.3
 anchor_top = 0.45
@@ -57,5 +56,10 @@ anchor_bottom = 0.55
 offset_right = 8.0
 offset_bottom = 8.0
 text = "START GPS TRACKING"
+script = ExtResource("2_sugp2")
 
-[connection signal="pressed" from="userInterface/CanvasLayer/StartButton" to="gpsManager" method="_on_start_button_pressed"]
+[node name="headingManager" type="Node" parent="." unique_id=1598175098]
+unique_name_in_owner = true
+script = ExtResource("2_0wfyh")
+
+[connection signal="pressed" from="UI/CanvasLayer/StartButton" to="UI/CanvasLayer/StartButton" method="_on_pressed"]
