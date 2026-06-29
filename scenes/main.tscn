@@ -55,7 +55,7 @@ anchor_right = 0.7
 anchor_bottom = 0.55
 offset_right = 8.0
 offset_bottom = 8.0
-text = "START GPS TRACKING"
+text = "START TRACKING"
 script = ExtResource("2_sugp2")
 
 [node name="headingManager" type="Node" parent="." unique_id=1598175098]
