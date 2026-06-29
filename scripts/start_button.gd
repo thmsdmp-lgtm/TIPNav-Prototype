@@ -10,16 +10,15 @@ extends Button
 
 func _ready():
 	%gpsManager.gps_changed.connect(gps_changed)
-	%headingManager.heading_changed.connect(heading_changed)
-
-func heading_changed(heading):
-	headingLabel.text = "HEADING: " + str(heading)
 
 func gps_changed(position):
 	latLabel.text = "LATITUDE: " + str(position.latitude)
 	longLabel.text = "LONGITUDE: " + str(position.longitude)
 	altLabel.text = "ALTITUDE: " + str(position.altitude)
 	posAccLabel.text = "POSITION ACCURACY: " + str(position.accuracy)
+
+func _process(delta: float) -> void:
+	headingLabel.text = str(%headingManager.device_heading)
 
 func _on_pressed() -> void:
 	# start tracking gps
@@ -28,7 +27,7 @@ func _on_pressed() -> void:
 	var gps_result = await  %gpsManager.gps_signal
 	
 	# start tracking heading
-	%headingManager.start_watching()
+	%headingManager.start()
 	
 	if !gps_result[0]:
 		startButton.text = "GPSMANAGER FAILED TO INITIALIZE"
