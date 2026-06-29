@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c18v6ws2r5hoe" path="res://scripts/user_controller.gd" id="3_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://cwylop8ncukfd" path="res://textures/grid.png" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://cflm6pmpd1jk" path="res://scenes/cam_controller.gd" id="4_tefeu"]
+[ext_resource type="ArrayOccluder3D" uid="uid://bfahdctait3nm" path="res://assets/main.occ" id="6_tefeu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1vivr"]
 
@@ -39,7 +40,53 @@ sky = SubResource("Sky_tbgi4")
 unique_name_in_owner = true
 script = ExtResource("1_o5qli")
 
-[node name="UI" type="Node2D" parent="." unique_id=253335189]
+[node name="SCENE" type="Node3D" parent="." unique_id=1800848481]
+
+[node name="User" type="CharacterBody3D" parent="SCENE" unique_id=1681251705]
+script = ExtResource("3_jyhfs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SCENE/User" unique_id=1610220714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_1vivr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SCENE/User" unique_id=478700624]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1vivr")
+
+[node name="CamAnchor" type="Node3D" parent="SCENE/User" unique_id=1749368035]
+script = ExtResource("4_tefeu")
+
+[node name="Camera3D" type="Camera3D" parent="SCENE/User/CamAnchor" unique_id=1718871245]
+transform = Transform3D(1, 0, 0, 0, 0.64406115, 0.764974, 0, -0.764974, 0.64406115, 0, 16.230656, 12.726114)
+fov = 60.0
+
+[node name="Base" type="StaticBody3D" parent="SCENE" unique_id=631633194]
+
+[node name="Mesh" type="MeshInstance3D" parent="SCENE/Base" unique_id=330942372]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_1vivr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SCENE/Base" unique_id=493508841]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_tefeu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SCENE" unique_id=1333049290]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SCENE" unique_id=770780418]
+environment = SubResource("Environment_tefeu")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="SCENE" unique_id=1292608747]
+occluder = ExtResource("6_tefeu")
+
+[node name="UI" type="Control" parent="." unique_id=2139048842]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=841797601]
 
@@ -82,42 +129,5 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "START"
 script = ExtResource("2_sugp2")
-
-[node name="SCENE" type="Node3D" parent="." unique_id=1800848481]
-
-[node name="User" type="CharacterBody3D" parent="SCENE" unique_id=1681251705]
-script = ExtResource("3_jyhfs")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SCENE/User" unique_id=1610220714]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_1vivr")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SCENE/User" unique_id=478700624]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_1vivr")
-
-[node name="CamAnchor" type="Node3D" parent="SCENE/User" unique_id=1749368035]
-script = ExtResource("4_tefeu")
-
-[node name="Camera3D" type="Camera3D" parent="SCENE/User/CamAnchor" unique_id=1718871245]
-transform = Transform3D(1, 0, 0, 0, 0.64406115, 0.764974, 0, -0.764974, 0.64406115, 0, 16.230656, 12.726114)
-fov = 60.0
-
-[node name="Base" type="StaticBody3D" parent="SCENE" unique_id=631633194]
-
-[node name="Mesh" type="MeshInstance3D" parent="SCENE/Base" unique_id=330942372]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-mesh = SubResource("QuadMesh_1vivr")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SCENE/Base" unique_id=493508841]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-shape = SubResource("ConcavePolygonShape3D_tefeu")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SCENE" unique_id=1333049290]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SCENE" unique_id=770780418]
-environment = SubResource("Environment_tefeu")
 
 [connection signal="pressed" from="UI/CanvasLayer/StartButton" to="UI/CanvasLayer/StartButton" method="_on_pressed"]
