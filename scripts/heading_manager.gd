@@ -13,36 +13,50 @@ func _ready() -> void:
 	if OS.has_feature("web"):
 		_js_callback = JavaScriptBridge.create_callback(_on_js_heading_update)
 
-func check_heading_permission() -> void:
+## Checks permission and returns the status string ("granted", "prompt", etc.)
+func check_heading_permission() -> String:
 	if not OS.has_feature("web"):
 		_emit_error("Heading API is only available on Web exports.")
 		permission_status_changed.emit("unsupported")
-		return
+		return "unsupported"
 
 	var window = JavaScriptBridge.get_interface("window")
 	
+	if not window or not ("DeviceOrientationEvent" in window):
+		permission_status_changed.emit("unsupported")
+		return "unsupported"
+	
 	# iOS 13+ specific permission check
 	if window.DeviceOrientationEvent and window.DeviceOrientationEvent.requestPermission:
-		# iOS doesn't let us query state directly without invoking the request, 
-		# but we can check if it's available. We default to "prompt" status.
 		permission_status_changed.emit("prompt")
+		return "prompt"
 	else:
 		# Android / Desktop standard behavior (usually granted by default if sensor exists)
 		permission_status_changed.emit("granted")
+		return "granted"
 
 func start_watching_heading() -> void:
 	if _is_watching: return
 	if not OS.has_feature("web"): return
 
+	# --- PRE-FLIGHT PERMISSION CHECK ---
+	var current_status = check_heading_permission()
+	if current_status == "unsupported":
+		error_occurred.emit(false)
+		return
+	
+	error_occurred.emit(true)
+	
 	var window = JavaScriptBridge.get_interface("window")
 	
 	# iOS Handling (Requires explicit permission request triggered by a user gesture)
 	if window.DeviceOrientationEvent and window.DeviceOrientationEvent.requestPermission:
+		
 		var promise = window.DeviceOrientationEvent.requestPermission()
 		
 		# Set up callbacks for the Promise
 		var on_granted = JavaScriptBridge.create_callback(func(args):
-			var response = args[0]
+			var response = args[0] # "granted" or "denied"
 			permission_status_changed.emit(response)
 			if response == "granted":
 				_attach_listener(window)
@@ -68,8 +82,9 @@ func stop_watching_heading() -> void:
 	var window = JavaScriptBridge.get_interface("window")
 	
 	# Remove listeners for both iOS and Android variants
-	window.removeEventListener("deviceorientationabsolute", _js_callback)
-	window.removeEventListener("deviceorientation", _js_callback)
+	if window:
+		window.removeEventListener("deviceorientationabsolute", _js_callback)
+		window.removeEventListener("deviceorientation", _js_callback)
 	
 	_is_watching = false
 
@@ -94,8 +109,6 @@ func _on_js_heading_update(args: Array) -> void:
 		heading = float(event.webkitCompassHeading)
 	# Android / Web Standard (alpha is 0 to 360, absolute flag ensures it's earth-relative)
 	elif "alpha" in event and event.alpha != null:
-		# If it's standard deviceorientation, alpha can be relative to where the device started.
-		# If absolute, it's relative to Earth's north.
 		# WebKit / iOS goes 0-360 clockwise. Alpha is 0-360 counter-clockwise, so we invert it.
 		heading = 360.0 - float(event.alpha)
 	

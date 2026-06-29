@@ -29,22 +29,22 @@ alignment = 1
 
 [node name="Lat" type="Label" parent="UI/CanvasLayer/Container" unique_id=581806648]
 layout_mode = 2
-text = "LATITUDE"
 horizontal_alignment = 1
 
 [node name="Long" type="Label" parent="UI/CanvasLayer/Container" unique_id=701958305]
 layout_mode = 2
-text = "LATITUDE"
 horizontal_alignment = 1
 
 [node name="Alt" type="Label" parent="UI/CanvasLayer/Container" unique_id=2125977871]
 layout_mode = 2
-text = "ALTITUDE"
 horizontal_alignment = 1
 
 [node name="PosAcc" type="Label" parent="UI/CanvasLayer/Container" unique_id=1275106513]
 layout_mode = 2
-text = "POS ACC"
+horizontal_alignment = 1
+
+[node name="Heading" type="Label" parent="UI/CanvasLayer/Container" unique_id=1371104935]
+layout_mode = 2
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="UI/CanvasLayer" unique_id=2014055616]

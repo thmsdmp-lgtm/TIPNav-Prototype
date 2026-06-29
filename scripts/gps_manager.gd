@@ -4,13 +4,6 @@ class_name GpsManager
 # ID returned by watchPosition()
 var _watch_id := -1
 
-@onready var labelContainer = $"../UI/CanvasLayer/Container"
-@onready var startButton = $"../UI/CanvasLayer/StartButton"
-@onready var latLabel = $"../UI/CanvasLayer/Container/Lat"
-@onready var longLabel = $"../UI/CanvasLayer/Container/Long"
-@onready var altLabel = $"../UI/CanvasLayer/Container/Alt"
-@onready var posAccLabel = $"../UI/CanvasLayer/Container/PosAcc"
-
 # local vars for window and nav
 var window
 var navigator
@@ -54,7 +47,7 @@ func check_gps_access():
 
 func start_watching_gps():
 	if !OS.has_feature("web"):
-		startButton.text = "NOT ON WEB"
+		print("NOT ON WEB")
 		return
 	
 	window = JavaScriptBridge.get_interface("window")
@@ -71,21 +64,18 @@ func start_watching_gps():
 	if _watch_id != -1:
 		return
 	
-	startButton.visible = false
-	labelContainer.visible = true
-		
 	print("Starting GPS watch...")
 	
 	if window == null:
-		startButton.text = "FAILED TO GET WINDOW"
+		print("FAILED TO GET WINDOW")
 		return
 
 	if navigator == null:
-		startButton.text = "NO NAVIGATOR"
+		print("NO NAVIGATOR")
 		return
 
 	if navigator.geolocation == null:
-		startButton.text = "NO GEOLOCATION"
+		print("NO GEOLOCATION")
 		return
 
 	var options = JavaScriptBridge.create_object("Object")
@@ -127,12 +117,6 @@ func _on_gps_success(args: Array) -> void:
 	
 	gps_changed.emit(position)
 	
-	latLabel.text = "LATITUDE: " + str(position.latitude)
-	longLabel.text = "LONGITUDE: " + str(position.longitude)
-	altLabel.text = "ALTITUDE: " + str(position.altitude)
-
-	posAccLabel.text = "POSITION ACCURACY: " + str(position.accuracy)
-
 	print("GPS Updated")
 
 func _on_gps_error(args: Array) -> void:
@@ -140,12 +124,6 @@ func _on_gps_error(args: Array) -> void:
 	
 	gps_signal.emit(false,error.code)
 	print("GPS Error:", error.code, error.message)
-	
-	latLabel.text = "LATITUDE: --"
-	longLabel.text = "LONGITUDE: --"
-	altLabel.text = "ALTITUDE: --"
-	
-	posAccLabel.text = "POSITION ACCURACY: --"
 	
 	match int(error.code):
 		1:
