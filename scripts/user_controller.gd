@@ -1,16 +1,20 @@
 extends Node3D
 
 # instances
-@onready var user_avatar = $"."
+@onready var user_avatar := $"."
 
 # constants
-const EARTH_RADIUS = 6378137.0 # meters
-const  movement_threshold = .25 # meters
+const campus_origin := {
+	"longitude":0,
+	"latitude":0,
+}
+const EARTH_RADIUS := 6378137.0 # meters
+const  movement_threshold := .25 # meters
 
 # variables
-var active = false
-var lon0
-var lat0
+var active := false
+var lon0:float
+var lat0:float
 
 func _ready():
 	var result = await  %gpsManager.gps_signal

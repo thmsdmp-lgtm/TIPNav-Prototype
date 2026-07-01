@@ -1,3 +1,15 @@
+#---------------------------------
+#       -- API / FUNCS -- 
+#
+#-check_gps_access()
+# -checks gps access from user
+#
+#-start_watching_gps()
+# -start monitoring position changes
+#
+#-stop_watching_gps()
+# -stop monitoring positional changes
+
 extends Node
 class_name GpsManager
 
@@ -9,8 +21,8 @@ var window
 var navigator
 
 # class variables
-var direction = 0
-var position = {
+var direction := 0
+var position := {
 	"latitude":0,
 	"longitude":0,
 	"altitude":0,
@@ -55,9 +67,6 @@ func start_watching_gps():
 	
 	var access = await check_gps_access()
 	if not access[0]:
-		window = JavaScriptBridge.get_interface("window")
-		if window:
-			window.alert("Please enable GPS/Location Services on your device.")
 		return
 	
 	# Prevent creating multiple watches

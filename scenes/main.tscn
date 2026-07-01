@@ -57,8 +57,10 @@ shape = SubResource("CapsuleShape3D_1vivr")
 script = ExtResource("4_tefeu")
 
 [node name="Camera3D" type="Camera3D" parent="SCENE/User/CamAnchor" unique_id=1718871245]
-transform = Transform3D(1, 0, 0, 0, 0.64406115, 0.764974, 0, -0.764974, 0.64406115, 0, 16.230656, 12.726114)
+transform = Transform3D(0.9396926, -0.2616185, 0.22030324, 0, 0.6441236, 0.76492137, -0.34202012, -0.71879095, 0.6052782, 5, 16.231, 12.726)
+projection = 1
 fov = 60.0
+size = 25.0
 
 [node name="Base" type="StaticBody3D" parent="SCENE" unique_id=631633194]
 

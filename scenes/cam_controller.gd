@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var camera = $Camera3D
+@onready var camera := $Camera3D
 
 var sensitivity := 0.0025
 
