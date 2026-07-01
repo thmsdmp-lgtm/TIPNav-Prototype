@@ -8,6 +8,7 @@ const campus_origin := {
 	"longitude":0,
 	"latitude":0,
 }
+
 const EARTH_RADIUS := 6378137.0 # meters
 const  movement_threshold := .25 # meters
 
