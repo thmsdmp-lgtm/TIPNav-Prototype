@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://bta4ob2u1655v"]
 
-[node name="Node" type="Node" unique_id=1886722283]
+[node name="MAIN" type="Node" unique_id=1886722283]
+
+[node name="UI" type="Control" parent="." unique_id=2145389092]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
