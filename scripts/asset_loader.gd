@@ -16,10 +16,3 @@ func _on_asset_fetcher_asset_updated() -> void:
 		get_tree().change_scene_to_packed(packed_scene)
 	else:
 		print("Failed to load scene resource from: ", scene_path)
-
-func _load_scene_from_user(path:String):
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

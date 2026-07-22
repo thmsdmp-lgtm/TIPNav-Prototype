@@ -20,7 +20,7 @@ func _ready() -> void:
 	if err != OK:
 		print("Failed to fetch asset")
 
-func req_success(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+func req_success(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	if result != HTTPRequest.RESULT_SUCCESS or response_code != 200:
 		print("Download failed with HTTP response code: ", response_code)
 		return
