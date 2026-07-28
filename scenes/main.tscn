@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://dr2us2vnnjurn"]
+
+[ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://scripts/gps_manager.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://dlss7b27bujgg" path="res://scripts/start_button.gd" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://c18v6ws2r5hoe" path="res://scripts/user_controller.gd" id="3_jyhfs"]
+[ext_resource type="Script" uid="uid://cflm6pmpd1jk" path="res://scripts/cam_controller.gd" id="3_tefeu"]
+[ext_resource type="Texture2D" uid="uid://cwylop8ncukfd" path="res://textures/grid.png" id="4_tbgi4"]
+[ext_resource type="ArrayOccluder3D" uid="uid://bfahdctait3nm" path="res://assets/main.occ" id="6_tefeu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1vivr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1vivr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vrlf"]
+albedo_texture = ExtResource("4_tbgi4")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_1vivr"]
+material = SubResource("StandardMaterial3D_8vrlf")
+size = Vector2(100, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tefeu"]
+data = PackedVector3Array(50, -50, 0, -50, -50, 0, 50, 50, 0, -50, -50, 0, -50, 50, 0, 50, 50, 0)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jyhfs"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_tbgi4"]
+sky_material = SubResource("ProceduralSkyMaterial_jyhfs")
+
+[sub_resource type="Environment" id="Environment_tefeu"]
+background_mode = 2
+sky = SubResource("Sky_tbgi4")
+
+[node name="Main" type="Node" unique_id=1886722283]
+
+[node name="gpsManager" type="Node" parent="." unique_id=488604117]
+unique_name_in_owner = true
+script = ExtResource("1_o5qli")
+
+[node name="SCENE" type="Node3D" parent="." unique_id=1800848481]
+
+[node name="User" type="CharacterBody3D" parent="SCENE" unique_id=1681251705]
+script = ExtResource("3_jyhfs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SCENE/User" unique_id=1610220714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_1vivr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SCENE/User" unique_id=478700624]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1vivr")
+
+[node name="CamAnchor" type="Node3D" parent="SCENE/User" unique_id=1749368035]
+script = ExtResource("3_tefeu")
+
+[node name="Camera3D" type="Camera3D" parent="SCENE/User/CamAnchor" unique_id=1718871245]
+transform = Transform3D(0.9396926, -0.2616185, 0.22030324, 0, 0.6441236, 0.76492137, -0.34202012, -0.71879095, 0.6052782, 5, 16.231, 12.726)
+projection = 1
+current = true
+fov = 60.0
+size = 25.0
+
+[node name="Base" type="StaticBody3D" parent="SCENE" unique_id=631633194]
+
+[node name="Mesh" type="MeshInstance3D" parent="SCENE/Base" unique_id=330942372]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_1vivr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SCENE/Base" unique_id=493508841]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_tefeu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SCENE" unique_id=1333049290]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SCENE" unique_id=770780418]
+environment = SubResource("Environment_tefeu")
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="SCENE" unique_id=1292608747]
+occluder = ExtResource("6_tefeu")
+
+[node name="UI" type="Control" parent="." unique_id=2139048842]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=841797601]
+
+[node name="Container" type="VBoxContainer" parent="UI/CanvasLayer" unique_id=1387178276]
+visible = false
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+offset_right = 40.0
+offset_bottom = 43.11499
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Lat" type="Label" parent="UI/CanvasLayer/Container" unique_id=581806648]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Long" type="Label" parent="UI/CanvasLayer/Container" unique_id=701958305]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Alt" type="Label" parent="UI/CanvasLayer/Container" unique_id=2125977871]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="PosAcc" type="Label" parent="UI/CanvasLayer/Container" unique_id=1275106513]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="UI/CanvasLayer" unique_id=2014055616]
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.45
+anchor_right = 0.7
+anchor_bottom = 0.55
+offset_right = 8.0
+offset_bottom = 8.0
+text = "START"
+script = ExtResource("2_sugp2")
+
+[connection signal="pressed" from="UI/CanvasLayer/StartButton" to="UI/CanvasLayer/StartButton" method="_on_pressed"]
