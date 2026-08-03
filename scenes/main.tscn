@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dr2us2vnnjurn"]
+[gd_scene format=3 uid="uid://bta4ob2u1655v"]
 
-[ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://scripts/gps_manager.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://classes/gps_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://dlss7b27bujgg" path="res://scripts/start_button.gd" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://c18v6ws2r5hoe" path="res://scripts/user_controller.gd" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://cflm6pmpd1jk" path="res://scripts/cam_controller.gd" id="3_tefeu"]
@@ -38,7 +38,7 @@ sky = SubResource("Sky_tbgi4")
 
 [node name="gpsManager" type="Node" parent="." unique_id=488604117]
 unique_name_in_owner = true
-script = ExtResource("1_o5qli")
+script = ExtResource("1_tefeu")
 
 [node name="SCENE" type="Node3D" parent="." unique_id=1800848481]
 

@@ -10,7 +10,7 @@
 #---------------------------------------------------------
 
 extends Node3D
-class_name  Pathfinding
+class_name  Pathfinder
 
 var navigation_map:RID
 var path3D: Path3D

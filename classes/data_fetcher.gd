@@ -1,5 +1,5 @@
 extends Node
-class_name AssetFetcher
+class_name DataFetcher
 
 # class for fetching assets stored inside
 # a repository
