@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://d3v1q8o43a7q1"]
+
+[ext_resource type="Script" uid="uid://bd1pxdq46enxh" path="res://view_on_map.gd" id="1_kwukv"]
+
+[node name="ViewOnMap" type="Control" unique_id=987597104]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kwukv")

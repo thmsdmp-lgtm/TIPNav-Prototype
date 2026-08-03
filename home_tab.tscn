@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dj5tdot1ywuyp"]
+
+[ext_resource type="Script" uid="uid://bobljiia2i433" path="res://home_tab.gd" id="1_raaq6"]
+
+[node name="HomeTab" type="Control" unique_id=295835221]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_raaq6")
