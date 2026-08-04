@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cflm6pmpd1jk" path="res://scripts/cam_controller.gd" id="3_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cwylop8ncukfd" path="res://textures/grid.png" id="4_tbgi4"]
 [ext_resource type="ArrayOccluder3D" uid="uid://bfahdctait3nm" path="res://assets/main.occ" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://b3671ryuh7jsr" path="res://classes/custom_grid_container.gd" id="7_o6xl0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1vivr"]
 
@@ -39,7 +40,7 @@ content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.7539839, 0.75398386, 0.75398386, 1)
+bg_color = Color(0.9079417, 0.9079417, 0.9079416, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -52,11 +53,14 @@ content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-corner_detail = 5
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.09019608)
+shadow_size = 5
+shadow_offset = Vector2(2, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
 content_margin_left = 4.0
@@ -96,6 +100,48 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.74138474, 0.7413847, 0.74138457, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb6dy"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8vrlf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8y0u"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.03137255)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tefeu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v5gy4"]
 
 [node name="Main" type="Node" unique_id=1886722283]
 
@@ -215,32 +261,156 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tefeu")
+metadata/_edit_use_anchors_ = true
 
 [node name="search" type="Panel" parent="UI/homepage" unique_id=89599160]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.1
+anchor_left = 0.062962964
 anchor_top = 0.03
-anchor_right = 0.9
-anchor_bottom = 0.048
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+anchor_right = 0.93703705
+anchor_bottom = 0.083333336
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+metadata/_edit_use_anchors_ = true
 
 [node name="LineEdit" type="LineEdit" parent="UI/homepage/search" unique_id=1282972256]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.025
+anchor_left = 0.13
 anchor_right = 0.975
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.16206536, 0.16206571, 0.16206542, 1)
+theme_override_colors/font_color = Color(0.37254903, 0.37254903, 0.37254903, 1)
+theme_override_colors/font_placeholder_color = Color(0.8175209, 0.8175214, 0.8175209, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_tipki")
 theme_override_styles/read_only = SubResource("StyleBoxFlat_85g3d")
 theme_override_styles/focus = SubResource("StyleBoxFlat_choun")
 placeholder_text = "where to?"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="UI/homepage/search" unique_id=1995258815]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.15
+anchor_right = 0.125
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ya4ey")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eb6dy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ya4ey")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ya4ey")
+metadata/_edit_use_anchors_ = true
+
+[node name="news-board" type="Panel" parent="UI/homepage" unique_id=1364319371]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062962964
+anchor_top = 0.1
+anchor_right = 0.93703705
+anchor_bottom = 0.25
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="UI/homepage/news-board" unique_id=1051439976]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8vrlf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8y0u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8vrlf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8vrlf")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI/homepage/news-board" unique_id=1789844580]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.37413925, 0.37413928, 0.37413922, 1)
+text = "(NEWS BOARD)
+PLACEHOLDER CONTENT"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="shortcut-containers" type="Panel" parent="UI/homepage" unique_id=1304595253]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062962964
+anchor_top = 0.267
+anchor_right = 0.93703705
+anchor_bottom = 0.508
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tefeu")
+metadata/_edit_use_anchors_ = true
+
+[node name="gridcontainer" type="Panel" parent="UI/homepage/shortcut-containers" unique_id=2040980460]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_v5gy4")
+script = ExtResource("7_o6xl0")
+spacing = 10.0
+
+[node name="news-board" type="Panel" parent="UI/homepage/shortcut-containers/gridcontainer" unique_id=1221403246]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+
+[node name="news-board2" type="Panel" parent="UI/homepage/shortcut-containers/gridcontainer" unique_id=1496246115]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+
+[node name="news-board3" type="Panel" parent="UI/homepage/shortcut-containers/gridcontainer" unique_id=661168012]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+
+[node name="news-board4" type="Panel" parent="UI/homepage/shortcut-containers/gridcontainer" unique_id=562400453]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
 
 [connection signal="pressed" from="UI/gps/StartButton" to="UI/gps/StartButton" method="_on_pressed"]
