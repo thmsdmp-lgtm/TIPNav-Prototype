@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://bta4ob2u1655v"]
 
-[ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://scripts/gps_manager.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://classes/gps_manager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://dlss7b27bujgg" path="res://scripts/start_button.gd" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://c18v6ws2r5hoe" path="res://scripts/user_controller.gd" id="3_jyhfs"]
+[ext_resource type="Script" uid="uid://cflm6pmpd1jk" path="res://scripts/cam_controller.gd" id="3_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cwylop8ncukfd" path="res://textures/grid.png" id="4_tbgi4"]
-[ext_resource type="Script" uid="uid://cflm6pmpd1jk" path="res://scenes/cam_controller.gd" id="4_tefeu"]
 [ext_resource type="ArrayOccluder3D" uid="uid://bfahdctait3nm" path="res://assets/main.occ" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://b3671ryuh7jsr" path="res://classes/custom_grid_container.gd" id="7_o6xl0"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1vivr"]
 
@@ -34,11 +35,120 @@ sky_material = SubResource("ProceduralSkyMaterial_jyhfs")
 background_mode = 2
 sky = SubResource("Sky_tbgi4")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tefeu"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.9079417, 0.9079417, 0.9079416, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.09019608)
+shadow_size = 5
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+border_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85g3d"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+border_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_choun"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+border_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.74138474, 0.7413847, 0.74138457, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb6dy"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8vrlf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8y0u"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.03137255)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tefeu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v5gy4"]
+
 [node name="Main" type="Node" unique_id=1886722283]
+metadata/_edit_vertical_guides_ = [-95.0]
 
 [node name="gpsManager" type="Node" parent="." unique_id=488604117]
 unique_name_in_owner = true
-script = ExtResource("1_o5qli")
+script = ExtResource("1_tefeu")
 
 [node name="SCENE" type="Node3D" parent="." unique_id=1800848481]
 
@@ -54,7 +164,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_1vivr")
 
 [node name="CamAnchor" type="Node3D" parent="SCENE/User" unique_id=1749368035]
-script = ExtResource("4_tefeu")
+script = ExtResource("3_tefeu")
 
 [node name="Camera3D" type="Camera3D" parent="SCENE/User/CamAnchor" unique_id=1718871245]
 transform = Transform3D(0.9396926, -0.2616185, 0.22030324, 0, 0.6441236, 0.76492137, -0.34202012, -0.71879095, 0.6052782, 5, 16.231, 12.726)
@@ -82,7 +192,10 @@ environment = SubResource("Environment_tefeu")
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="SCENE" unique_id=1292608747]
 occluder = ExtResource("6_tefeu")
 
-[node name="UI" type="Control" parent="." unique_id=2139048842]
+[node name="UI" type="CanvasLayer" parent="." unique_id=841797601]
+
+[node name="gps" type="Control" parent="UI" unique_id=2139048842]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,10 +204,8 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="UI" unique_id=841797601]
-
-[node name="Container" type="VBoxContainer" parent="UI/CanvasLayer" unique_id=1387178276]
-visible = false
+[node name="Container" type="VBoxContainer" parent="UI/gps" unique_id=1387178276]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
 anchor_top = 0.25
@@ -106,23 +217,24 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Lat" type="Label" parent="UI/CanvasLayer/Container" unique_id=581806648]
+[node name="Lat" type="Label" parent="UI/gps/Container" unique_id=581806648]
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Long" type="Label" parent="UI/CanvasLayer/Container" unique_id=701958305]
+[node name="Long" type="Label" parent="UI/gps/Container" unique_id=701958305]
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="Alt" type="Label" parent="UI/CanvasLayer/Container" unique_id=2125977871]
+[node name="Alt" type="Label" parent="UI/gps/Container" unique_id=2125977871]
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="PosAcc" type="Label" parent="UI/CanvasLayer/Container" unique_id=1275106513]
+[node name="PosAcc" type="Label" parent="UI/gps/Container" unique_id=1275106513]
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="UI/CanvasLayer" unique_id=2014055616]
+[node name="StartButton" type="Button" parent="UI/gps" unique_id=2014055616]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3
 anchor_top = 0.45
@@ -133,4 +245,174 @@ offset_bottom = 8.0
 text = "START"
 script = ExtResource("2_sugp2")
 
-[connection signal="pressed" from="UI/CanvasLayer/StartButton" to="UI/CanvasLayer/StartButton" method="_on_pressed"]
+[node name="homepage" type="Control" parent="UI" unique_id=2030038515]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="bg" type="Panel" parent="UI/homepage" unique_id=1271083498]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tefeu")
+metadata/_edit_use_anchors_ = true
+
+[node name="search" type="Panel" parent="UI/homepage" unique_id=89599160]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062962964
+anchor_top = 0.02
+anchor_right = 0.93703705
+anchor_bottom = 0.083333336
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+metadata/_edit_use_anchors_ = true
+
+[node name="LineEdit" type="LineEdit" parent="UI/homepage/search" unique_id=1282972256]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.14
+anchor_right = 0.975
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.37254903, 0.37254903, 0.37254903, 1)
+theme_override_colors/font_placeholder_color = Color(0.8175209, 0.8175214, 0.8175209, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_tipki")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_85g3d")
+theme_override_styles/focus = SubResource("StyleBoxFlat_choun")
+placeholder_text = "where to?"
+virtual_keyboard_type = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="UI/homepage/search" unique_id=1995258815]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.15
+anchor_right = 0.14
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ya4ey")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eb6dy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ya4ey")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ya4ey")
+metadata/_edit_use_anchors_ = true
+
+[node name="news-board" type="Panel" parent="UI/homepage" unique_id=1364319371]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062962964
+anchor_top = 0.1
+anchor_right = 0.93703705
+anchor_bottom = 0.25
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="UI/homepage/news-board" unique_id=1051439976]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8vrlf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8y0u")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8vrlf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8vrlf")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI/homepage/news-board" unique_id=1789844580]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.37413925, 0.37413928, 0.37413922, 1)
+text = "(NEWS BOARD)
+PLACEHOLDER CONTENT"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="shortcuts" type="Panel" parent="UI/homepage" unique_id=1304595253]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062962964
+anchor_top = 0.267
+anchor_right = 0.93703705
+anchor_bottom = 0.508
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tefeu")
+metadata/_edit_use_anchors_ = true
+
+[node name="gridcontainer" type="Panel" parent="UI/homepage/shortcuts" unique_id=2040980460]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_v5gy4")
+script = ExtResource("7_o6xl0")
+spacing = 10.0
+
+[node name="news-board2" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=1496246115]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+
+[node name="news-board3" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=1818088880]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+
+[node name="news-board4" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=64719248]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+
+[node name="news-board5" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=2056271847]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+
+[connection signal="pressed" from="UI/gps/StartButton" to="UI/gps/StartButton" method="_on_pressed"]
