@@ -288,6 +288,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_tipki")
 theme_override_styles/read_only = SubResource("StyleBoxFlat_85g3d")
 theme_override_styles/focus = SubResource("StyleBoxFlat_choun")
 placeholder_text = "where to?"
+virtual_keyboard_type = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="UI/homepage/search" unique_id=1995258815]
