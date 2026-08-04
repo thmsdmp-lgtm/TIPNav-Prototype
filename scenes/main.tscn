@@ -144,6 +144,7 @@ corner_detail = 10
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v5gy4"]
 
 [node name="Main" type="Node" unique_id=1886722283]
+metadata/_edit_vertical_guides_ = [-95.0]
 
 [node name="gpsManager" type="Node" parent="." unique_id=488604117]
 unique_name_in_owner = true
@@ -394,19 +395,6 @@ layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = -5.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
-
-[node name="news-board4" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=562400453]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
 offset_top = 5.0
