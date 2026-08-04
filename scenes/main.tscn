@@ -346,7 +346,6 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="shortcuts" type="Panel" parent="UI/homepage" unique_id=1304595253]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.062962964
