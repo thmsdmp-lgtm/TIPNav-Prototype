@@ -367,21 +367,9 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_v5gy4")
 script = ExtResource("7_o6xl0")
 spacing = 10.0
 
-[node name="news-board" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=1221403246]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = -5.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
-
 [node name="news-board2" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=1496246115]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
