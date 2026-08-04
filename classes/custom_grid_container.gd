@@ -7,7 +7,7 @@ class_name CustomGridContainer
 		spacing = value
 		update_layout()
 
-func _process(delta: float) -> void:
+func _notification(what):
 	update_layout()
 
 func update_layout() -> void:

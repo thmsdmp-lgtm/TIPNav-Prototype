@@ -343,7 +343,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="shortcut-containers" type="Panel" parent="UI/homepage" unique_id=1304595253]
+[node name="shortcuts" type="Panel" parent="UI/homepage" unique_id=1304595253]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.062962964
@@ -354,7 +354,7 @@ grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_tefeu")
 metadata/_edit_use_anchors_ = true
 
-[node name="gridcontainer" type="Panel" parent="UI/homepage/shortcut-containers" unique_id=2040980460]
+[node name="gridcontainer" type="Panel" parent="UI/homepage/shortcuts" unique_id=2040980460]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -365,7 +365,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_v5gy4")
 script = ExtResource("7_o6xl0")
 spacing = 10.0
 
-[node name="news-board" type="Panel" parent="UI/homepage/shortcut-containers/gridcontainer" unique_id=1221403246]
+[node name="news-board" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=1221403246]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.5
@@ -376,7 +376,7 @@ offset_right = -5.0
 offset_bottom = -5.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
 
-[node name="news-board2" type="Panel" parent="UI/homepage/shortcut-containers/gridcontainer" unique_id=1496246115]
+[node name="news-board2" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=1496246115]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -388,7 +388,7 @@ offset_right = -5.0
 offset_bottom = -5.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
 
-[node name="news-board3" type="Panel" parent="UI/homepage/shortcut-containers/gridcontainer" unique_id=661168012]
+[node name="news-board3" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=661168012]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
@@ -400,7 +400,7 @@ offset_right = -5.0
 offset_bottom = -5.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
 
-[node name="news-board4" type="Panel" parent="UI/homepage/shortcut-containers/gridcontainer" unique_id=562400453]
+[node name="news-board4" type="Panel" parent="UI/homepage/shortcuts/gridcontainer" unique_id=562400453]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
