@@ -241,7 +241,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_85g3d")
 ChildContainer = NodePath("rows")
-Sensitivity = 3.0
+Sensitivity = 4.0
 
 [node name="rows" type="Panel" parent="UI/home/suggestions/scroll" unique_id=669236959]
 custom_minimum_size = Vector2(0, 753)
