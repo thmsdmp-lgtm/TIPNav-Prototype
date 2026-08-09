@@ -271,7 +271,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_85g3d")
 ChildContainer = NodePath("rows")
-Sensitivity = 4.0
+Sensitivity = 100.0
 
 [node name="rows" type="Panel" parent="UI/home/suggestions/place-container" unique_id=669236959]
 custom_minimum_size = Vector2(0, 753)
@@ -483,6 +483,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jbj1t")
 script = ExtResource("15_dp3eg")
 TriggerControl = NodePath("expand-trigger")
+Sensitivity = 4.0
 
 [node name="category-container" type="Control" parent="UI/map/pullup_menu" unique_id=332172330 node_paths=PackedStringArray("ChildContainer")]
 clip_contents = true
@@ -498,7 +499,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_muem4")
 ChildContainer = NodePath("container")
-Sensitivitx = 4.0
+Sensitivity = 4.0
 
 [node name="container" type="Control" parent="UI/map/pullup_menu/category-container" unique_id=973723241]
 layout_mode = 1

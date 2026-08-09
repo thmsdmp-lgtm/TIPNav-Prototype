@@ -63,7 +63,7 @@ func move_menu(relative_y: float) -> void:
 	var final_sensitivity = clamp(
 		5.0 - Sensitivity,
 		0.1,
-		10.0
+		10
 	)
 	
 	var movement = relative_y / final_sensitivity
@@ -117,7 +117,6 @@ func _process(delta: float) -> void:
 		target_y,
 		20 * delta
 	)
-	
 	
 	# Stop triggered state once destination is reached
 	if triggering and is_equal_approx(global_position.y, target_y):

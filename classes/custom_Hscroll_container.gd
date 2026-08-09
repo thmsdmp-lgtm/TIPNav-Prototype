@@ -3,7 +3,7 @@ class_name CustomHScrollContainer
 
 # external variables
 @export var ChildContainer:Control
-@export var Sensitivitx:float = 2.5
+@export var Sensitivity:float = 2.5
 
 # internal variables
 var holding:bool = false
@@ -24,10 +24,10 @@ func _gui_input(event: InputEvent) -> void:
 				holding = false
 	
 	if event is InputEventMouseMotion and holding:
-		var finalSen = clamp(5-Sensitivitx,.1,10)
+		var finalSen = clamp(5-Sensitivity,.1,10)
 		deltaY = (event.relative.x/finalSen)
 	elif event is InputEventScreenDrag:
-		var finalSen = clamp(5-Sensitivitx,.1,10)
+		var finalSen = clamp(5-Sensitivity,.1,10)
 		deltaY = (event.relative.x/finalSen)
 
 func _process(delta: float) -> void:
