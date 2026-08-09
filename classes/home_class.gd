@@ -1,4 +1,5 @@
 extends Control
+class_name HomePage
 
 # enter tab
 func enter():

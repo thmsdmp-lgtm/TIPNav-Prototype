@@ -1,5 +1,5 @@
 extends Control
-class_name CustomScrollContainer2
+class_name CustomVScrollContainer
 
 # external variables
 @export var ChildContainer:Control
@@ -11,9 +11,8 @@ var deltaY:float
 
 func _ready() -> void:
 	clip_contents = true
-	gui_input.connect(on_input)
 
-func on_input(event: InputEvent) -> void:
+func _gui_input(event: InputEvent) -> void:
 	if not ChildContainer: return
 	
 	if event is InputEventMouseButton:
@@ -32,6 +31,8 @@ func on_input(event: InputEvent) -> void:
 		deltaY = (event.relative.y/finalSen)
 
 func _process(delta: float) -> void:
+	if not ChildContainer: return
+	
 	deltaY = lerp(deltaY,0.0,10*delta)
 	
 	var new_y := ChildContainer.global_position.y + deltaY

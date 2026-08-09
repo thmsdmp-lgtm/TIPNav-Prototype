@@ -1,4 +1,5 @@
 extends Node
+class_name TabHandler
 
 # external variables
 @export var user_interface:CanvasLayer

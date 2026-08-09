@@ -1,4 +1,5 @@
 extends Control
+class_name MapPage
 
 # enter tab
 func enter():
