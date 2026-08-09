@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://be6d4ddxckiyp" path="res://classes/tab_handler.gd" id="12_eb6dy"]
 [ext_resource type="Script" uid="uid://bfjxnpqjf1m62" path="res://scenes/trigger_pullup.gd" id="15_0ld40"]
 [ext_resource type="Script" uid="uid://d4f3mml3nxy30" path="res://classes/pullup_menu.gd" id="15_dp3eg"]
+[ext_resource type="Script" uid="uid://d35u4274k7ub6" path="res://scenes/info_visualizer.gd" id="17_0ld40"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1vivr"]
 
@@ -248,17 +249,16 @@ metadata/_edit_use_anchors_ = true
 
 [node name="suggestions" type="Panel" parent="UI/home" unique_id=1297074205]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 34.0
-offset_top = 632.0
-offset_right = -34.0
-offset_bottom = -29.0
+anchors_preset = -1
+anchor_left = 0.062962964
+anchor_top = 0.52666664
+anchor_right = 0.93703705
+anchor_bottom = 0.97583336
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_tipki")
 theme_override_styles/panel = SubResource("StyleBoxFlat_choun")
+metadata/_edit_use_anchors_ = true
 
 [node name="place-container" type="Control" parent="UI/home/suggestions" unique_id=1906987853 node_paths=PackedStringArray("ChildContainer")]
 clip_contents = true
@@ -278,17 +278,16 @@ custom_minimum_size = Vector2(0, 753)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025
-anchor_top = 0.025
+anchor_top = 0.024999952
 anchor_right = 0.975
-anchor_bottom = 1.0
-offset_top = -2.4795532e-05
-offset_bottom = 352.0
+anchor_bottom = 1.6698064
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_85g3d")
 script = ExtResource("8_choun")
 spacing = 10.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel2" type="Panel" parent="UI/home/suggestions/place-container/rows" unique_id=947237032]
 layout_mode = 1
@@ -473,33 +472,32 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 custom_minimum_size = Vector2(159, 0)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.6308333
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 757.0
-offset_bottom = 757.0
+anchor_bottom = 1.6308334
+offset_bottom = -0.00012207031
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jbj1t")
 script = ExtResource("15_dp3eg")
 TriggerControl = NodePath("expand-trigger")
 Sensitivity = 4.0
+metadata/_edit_use_anchors_ = true
 
 [node name="category-container" type="Control" parent="UI/map/pullup_menu" unique_id=332172330 node_paths=PackedStringArray("ChildContainer")]
 clip_contents = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = 8.0
-offset_right = -20.0
-offset_bottom = -1141.0
+anchor_left = 0.025925925
+anchor_top = 0.006666667
+anchor_right = 0.96296304
+anchor_bottom = 0.056666665
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_muem4")
 ChildContainer = NodePath("container")
 Sensitivity = 4.0
+metadata/_edit_use_anchors_ = true
 
 [node name="container" type="Control" parent="UI/map/pullup_menu/category-container" unique_id=973723241]
 layout_mode = 1
@@ -573,35 +571,32 @@ text = "Category
 [node name="place-container" type="Control" parent="UI/map/pullup_menu" unique_id=859621761 node_paths=PackedStringArray("ChildContainer")]
 clip_contents = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 68.0
-offset_right = -3.0
-offset_bottom = -20.0
+anchor_left = 0.0055555557
+anchor_top = 0.05666667
+anchor_right = 0.99444443
+anchor_bottom = 0.98333335
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_85g3d")
 ChildContainer = NodePath("rows")
 Sensitivity = 4.0
+metadata/_edit_use_anchors_ = true
 
 [node name="rows" type="Panel" parent="UI/map/pullup_menu/place-container" unique_id=227492768]
 custom_minimum_size = Vector2(0, 813)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025
-anchor_top = 0.025
+anchor_top = 0.018954137
 anchor_right = 0.975
-anchor_bottom = 1.0
-offset_top = -6.7229996
-offset_bottom = 413.352
+anchor_bottom = 1.3717195
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_85g3d")
 script = ExtResource("8_choun")
 spacing = 20.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel2" type="Panel" parent="UI/map/pullup_menu/place-container/rows" unique_id=753971449]
 layout_mode = 1
@@ -674,31 +669,29 @@ theme = ExtResource("7_tipki")
 
 [node name="expand-trigger" type="Panel" parent="UI/map/pullup_menu" unique_id=743408969]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -136.0
-offset_top = -1225.0
-offset_right = 136.0
-offset_bottom = -1212.0
+anchors_preset = -1
+anchor_left = 0.24814814
+anchor_top = -0.020833334
+anchor_right = 0.75185186
+anchor_bottom = -0.01
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_muem4")
 script = ExtResource("15_dp3eg")
+metadata/_edit_use_anchors_ = true
 
 [node name="tab-buttons" type="Panel" parent="UI" unique_id=1596602849]
 custom_minimum_size = Vector2(159, 0)
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.86
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1032.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ya4ey")
 script = ExtResource("11_ya4ey")
 spacing = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="home" type="Button" parent="UI/tab-buttons" unique_id=1436377082]
 layout_mode = 1
@@ -765,6 +758,14 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("7_tipki")
 metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI" unique_id=1711249648]
+offset_left = 3.0
+offset_right = 136.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "dawdsd"
+script = ExtResource("17_0ld40")
 
 [node name="CLASSES" type="Node" parent="." unique_id=876802754]
 
