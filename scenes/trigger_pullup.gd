@@ -7,6 +7,11 @@ func _ready() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if %tabHandler.current_tab.name != "map":
-				%tabHandler._switch_tab("map")
-			%pullup_menu.trigger(true)
+			trigger()
+	if event is InputEventScreenTouch:
+		trigger()
+
+func trigger():
+	if %tabHandler.current_tab.name != "map":
+		%tabHandler._switch_tab("map")
+	%pullup_menu.trigger(true)

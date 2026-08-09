@@ -23,7 +23,7 @@ func get_state() -> bool:
 		return false
 
 func trigger(full_screen:bool):
-	if not holding or deltaY==0:
+	if not holding and deltaY==0:
 		triggering[0] = true
 		
 		if full_screen:
@@ -55,7 +55,7 @@ func on_input(event):
 func _process(delta: float) -> void:
 	if not TriggerControl: return
 	
-	if not holding or deltaY == 0:
+	if not holding and deltaY == 0:
 		# lerp to pos
 		
 		var middle = (size.y/snap_trigger_ratio)
