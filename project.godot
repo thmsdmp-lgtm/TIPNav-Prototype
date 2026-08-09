@@ -44,6 +44,7 @@ renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
 environment/ssao/quality=0
+scaling_3d/scale=0.1
 occlusion_culling/use_occlusion_culling=true
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
