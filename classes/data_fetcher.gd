@@ -1,5 +1,5 @@
 extends Node
-class_name DataFetcher
+class_name DataHandler
 
 # class for fetching assets stored inside
 # a repository

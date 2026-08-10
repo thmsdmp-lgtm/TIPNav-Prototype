@@ -6,7 +6,7 @@ class_name PullupMenu
 @export var Sensitivity: float = 2.5
 
 # Fully opened Y position
-@export var max_pos: float = 150.0
+@export var max_pos: float = 200
 
 # Used to determine where the menu snaps
 @export var snap_trigger_ratio: float = 3.0
@@ -79,10 +79,8 @@ func move_menu(relative_y: float) -> void:
 
 # PROCESS / SNAP
 func _process(delta: float) -> void:
-	
 	if not TriggerControl:
 		return
-	
 	
 	# Do nothing while dragging
 	if holding:
@@ -97,7 +95,6 @@ func _process(delta: float) -> void:
 			target_y = max_pos
 		else:
 			target_y = original_Y
-	
 	
 	# NORMAL SNAP
 	else:

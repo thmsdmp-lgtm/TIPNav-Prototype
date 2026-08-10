@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://dju2vq1ip7nuj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2y4p"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcp76"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -10,7 +10,7 @@ corner_radius_top_left = 40
 corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
-corner_detail = 1
+corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdsw5"]
 content_margin_left = 4.0
@@ -22,19 +22,7 @@ corner_radius_top_left = 40
 corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
-corner_detail = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcp76"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.9098039, 0.9098039, 0.9098039, 1)
-corner_radius_top_left = 40
-corner_radius_top_right = 40
-corner_radius_bottom_right = 40
-corner_radius_bottom_left = 40
-corner_detail = 1
+corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8tnj"]
 content_margin_left = 4.0
@@ -46,7 +34,7 @@ corner_radius_top_left = 40
 corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
-corner_detail = 10
+corner_detail = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e2y4p"]
 
@@ -71,14 +59,14 @@ corner_radius_top_left = 40
 corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
-corner_detail = 1
+corner_detail = 5
 shadow_color = Color(0, 0, 0, 0.09019608)
 shadow_size = 5
 shadow_offset = Vector2(2, 2)
 
 [resource]
 Button/colors/font_color = Color(0.37254903, 0.37254903, 0.37254903, 1)
-Button/styles/focus = SubResource("StyleBoxFlat_e2y4p")
+Button/styles/focus = SubResource("StyleBoxFlat_rcp76")
 Button/styles/hover = SubResource("StyleBoxFlat_bdsw5")
 Button/styles/normal = SubResource("StyleBoxFlat_rcp76")
 Button/styles/pressed = SubResource("StyleBoxFlat_m8tnj")
