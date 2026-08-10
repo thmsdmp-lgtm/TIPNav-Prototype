@@ -10,7 +10,7 @@ corner_radius_top_left = 40
 corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
-corner_detail = 10
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdsw5"]
 content_margin_left = 4.0
@@ -34,7 +34,7 @@ corner_radius_top_left = 40
 corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
-corner_detail = 10
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8tnj"]
 content_margin_left = 4.0
@@ -71,7 +71,7 @@ corner_radius_top_left = 40
 corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
-corner_detail = 10
+corner_detail = 1
 shadow_color = Color(0, 0, 0, 0.09019608)
 shadow_size = 5
 shadow_offset = Vector2(2, 2)
