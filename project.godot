@@ -19,11 +19,10 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=360
-window/size/viewport_height=800
+window/size/viewport_width=1080
+window/size/viewport_height=2100
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/scale=0.5
 window/handheld/orientation=1
 window/vsync/vsync_mode=0
 
@@ -49,5 +48,5 @@ scaling_3d/scale=0.1
 occlusion_culling/use_occlusion_culling=true
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
-2d/sdf/scale=2
+2d/sdf/scale=0
 2d/stretch/mode="viewport"
