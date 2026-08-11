@@ -899,14 +899,6 @@ mouse_filter = 1
 theme = ExtResource("7_tipki")
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="UI" unique_id=1711249648]
-offset_left = 3.0
-offset_right = 136.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "dawdsd"
-script = ExtResource("17_0ld40")
-
 [node name="CLASSES" type="Node" parent="." unique_id=876802754]
 
 [node name="gpsManager" type="Node" parent="CLASSES" unique_id=488604117]
@@ -1133,5 +1125,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2cjbq")
+
+[node name="Label" type="Label" parent="INTERFACE" unique_id=1711249648]
+offset_left = 3.0
+offset_right = 343.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "dawdsd"
+uppercase = true
+script = ExtResource("17_0ld40")
 
 [connection signal="pressed" from="UI/gps/StartButton" to="UI/gps/StartButton" method="_on_pressed"]
