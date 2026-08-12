@@ -10,11 +10,9 @@ class_name TabHandler
 @export var explore_tab:Control
 
 # internal variables
-var current_tab:Control
+@export var current_tab:Control
 
 func _ready() -> void:
-	current_tab = $"../../UI/home"
-	
 	for b:Button in tab_buttons.get_children():
 		if b is Button:
 			b.pressed.connect(_switch_tab.bind(b.name))
