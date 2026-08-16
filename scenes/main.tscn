@@ -16,11 +16,10 @@
 [ext_resource type="Script" uid="uid://dg1kok5ovexo1" path="res://classes/map_class.gd" id="11_jkv2x"]
 [ext_resource type="Script" uid="uid://cpjy1g1oinbh8" path="res://classes/custom_column_container.gd" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://be6d4ddxckiyp" path="res://classes/tab_handler.gd" id="12_eb6dy"]
-[ext_resource type="Script" uid="uid://bfjxnpqjf1m62" path="res://scenes/trigger_pullup.gd" id="15_0ld40"]
+[ext_resource type="Script" uid="uid://bfjxnpqjf1m62" path="res://scripts/trigger_pullup.gd" id="15_0ld40"]
 [ext_resource type="Script" uid="uid://d4f3mml3nxy30" path="res://classes/pullup_menu.gd" id="15_dp3eg"]
-[ext_resource type="Script" uid="uid://d35u4274k7ub6" path="res://scenes/info_visualizer.gd" id="17_0ld40"]
+[ext_resource type="Script" uid="uid://d35u4274k7ub6" path="res://scripts/info_visualizer.gd" id="17_0ld40"]
 [ext_resource type="Script" uid="uid://sxn578bul5b1" path="res://classes/data_fetcher.gd" id="20_gqmmt"]
-[ext_resource type="Script" uid="uid://vy8c8htk71hs" path="res://scenes/categoryHandler.gd" id="21_yc10j"]
 [ext_resource type="Script" uid="uid://chsqgbsf1outx" path="res://classes/svg_to_control.gd" id="22_jscy8"]
 [ext_resource type="Texture2D" uid="uid://cufknuy720up0" path="res://assets/ui_icons/search icon.png" id="22_pm3ni"]
 [ext_resource type="Texture2D" uid="uid://bipmk3acbn4vh" path="res://icon.svg" id="23_y6deb"]
@@ -880,13 +879,9 @@ metadata/_custom_type_script = "uid://sxn578bul5b1"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="CLASSES/dataHandler" unique_id=1289586113]
 
-[node name="categoryHandler" type="Node" parent="CLASSES/dataHandler" unique_id=1030672016]
-script = ExtResource("21_yc10j")
-
-[node name="INTERFACE" type="CanvasLayer" parent="." unique_id=407465981 node_paths=PackedStringArray("target_panel")]
+[node name="INTERFACE" type="CanvasLayer" parent="." unique_id=407465981]
 script = ExtResource("22_jscy8")
 svg_path = "uid://bwd6i5nee41xo"
-target_panel = NodePath("")
 
 [node name="home" type="Control" parent="INTERFACE" unique_id=1557303284]
 layout_mode = 3
