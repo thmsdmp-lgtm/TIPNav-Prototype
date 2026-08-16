@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://tvgmjc2v35o6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wyq8"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+shadow_color = Color(0, 0, 0, 0.019607844)
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxglm"]
+bg_color = Color(0.6392157, 0.69411767, 0.5411765, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[node name="place" type="Panel" unique_id=1212035016]
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -1857.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_2wyq8")
+
+[node name="_Panel_25675" type="Panel" parent="." unique_id=926277896]
+layout_mode = 0
+anchor_right = 0.99999994
+anchor_bottom = 0.7040936
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_vxglm")
+metadata/_edit_use_anchors_ = true

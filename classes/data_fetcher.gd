@@ -1,8 +1,10 @@
-extends Node
-class_name DataHandler
-
 # class for fetching assets stored inside
 # a repository
+
+#--------------------------------------#
+
+extends Node
+class_name DataHandler
 
 @export var httpRequest:HTTPRequest
 var repoUrl = "https://github.com/thmsdmp-lgtm/TIPNav-Assets/archive/refs/heads/main.zip"
@@ -45,7 +47,7 @@ func req_success(result: int, response_code: int, _headers: PackedStringArray, b
 	delete_file("user://updated_assets.zip")
 	
 	# print new contents
-	print_user_dir_contents("user://Assets")
+	#print_user_dir_contents("user://Assets")
 	
 	# fire updated signal
 	assetUpdated.emit()

@@ -8,7 +8,7 @@ extends Button
 @onready var posAccLabel = $"../Container/PosAcc"
 
 func _ready():
-	%gpsManager.gps_changed.connect(gps_changed)
+	%GpsManager.gps_changed.connect(gps_changed)
 
 func gps_changed(position):
 	latLabel.text = "LATITUDE: " + str(position.latitude)
@@ -18,9 +18,9 @@ func gps_changed(position):
 
 func _on_pressed() -> void:
 	# start tracking gps
-	%gpsManager.start_watching_gps()
+	%GpsManager.start_watching_gps()
 	
-	var gps_result = await  %gpsManager.gps_signal
+	var gps_result = await  %GpsManager.gps_signal
 	
 	if !gps_result[0]:
 		return

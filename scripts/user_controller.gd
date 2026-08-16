@@ -18,13 +18,13 @@ var lon0:float
 var lat0:float
 
 func _ready():
-	var result = await  %gpsManager.gps_signal
+	var result = await  %GpsManager.gps_signal
 	
 	if result[0]:
-		await %gpsManager.gps_changed
+		await %GpsManager.gps_changed
 		
-		lon0 = %gpsManager.position.longitude
-		lat0 = %gpsManager.position.latitude
+		lon0 = %GpsManager.position.longitude
+		lat0 = %GpsManager.position.latitude
 		
 		active = true
 
@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	if !active:
 		return
 	
-	var gps_pos = %gpsManager.position
+	var gps_pos = %GpsManager.position
 	var game_pos =  latlon_to_meters(gps_pos.latitude,gps_pos.longitude)
 	
 	if game_pos.length() < movement_threshold:
