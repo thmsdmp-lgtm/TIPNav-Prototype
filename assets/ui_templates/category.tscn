@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://d0mkmkc8jhepn"]
+
+[ext_resource type="FontFile" uid="uid://b32frou57r1ts" path="res://assets/fonts/arial/ARIALBD.TTF" id="1_l1axt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5poiv"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0, 0, 0.019607844)
+shadow_size = 25
+
+[node name="category_1" type="Panel" unique_id=380851660]
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_5poiv")
+
+[node name="Label" type="Label" parent="." unique_id=1132521191]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_fonts/font = ExtResource("1_l1axt")
+theme_override_font_sizes/font_size = 30
+text = "CATEGORY"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -7,8 +7,14 @@ class_name CustomGridContainer
 		spacing = value
 		update_layout()
 
-func _notification(what):
-	update_layout()
+func _ready() -> void:
+	child_entered_tree.connect(func(_c):
+		call_deferred("update_layout")
+	)
+	
+	child_exiting_tree.connect(func(_c):
+		call_deferred("update_layout")
+	)
 
 func update_layout() -> void:
 	var children: Array[Control] = []

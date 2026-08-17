@@ -217,7 +217,7 @@ script = ExtResource("9_muem4")
 script = ExtResource("22_jscy8")
 svg_path = "uid://bwd6i5nee41xo"
 
-[node name="home" type="Control" parent="INTERFACE" unique_id=1557303284]
+[node name="home" type="Control" parent="INTERFACE" unique_id=1557303284 node_paths=PackedStringArray("category_Container", "suggested_Container_1", "suggested_Container_2")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,6 +225,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_trceg")
+category_template = "uid://d0mkmkc8jhepn"
+category_Container = NodePath("categories/container")
+suggested_Container_1 = NodePath("suggested_1/container")
+suggested_Container_2 = NodePath("suggested_2/container")
 
 [node name="bg" type="Panel" parent="INTERFACE/home" unique_id=569507686]
 clip_contents = true
@@ -271,9 +275,8 @@ script = ExtResource("11_ya4ey")
 spacing = 50.0
 metadata/_edit_use_anchors_ = true
 
-[node name="category_1" type="Panel" parent="INTERFACE/home/categories/container" unique_id=1538458483]
-layout_mode = 1
-anchors_preset = -1
+[node name="category_1" type="Panel" parent="INTERFACE/home/categories/container" unique_id=380851660]
+layout_mode = 0
 anchor_right = 0.25
 anchor_bottom = 1.0
 offset_left = 25.0
@@ -285,9 +288,8 @@ grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_5poiv")
 
-[node name="category_2" type="Panel" parent="INTERFACE/home/categories/container" unique_id=188995410]
-layout_mode = 1
-anchors_preset = -1
+[node name="category_2" type="Panel" parent="INTERFACE/home/categories/container" unique_id=472206955]
+layout_mode = 0
 anchor_left = 0.25
 anchor_right = 0.5
 anchor_bottom = 1.0
@@ -300,9 +302,8 @@ grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_5poiv")
 
-[node name="category_3" type="Panel" parent="INTERFACE/home/categories/container" unique_id=83816759]
-layout_mode = 1
-anchors_preset = -1
+[node name="category_3" type="Panel" parent="INTERFACE/home/categories/container" unique_id=1195482793]
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.75
 anchor_bottom = 1.0
@@ -315,9 +316,8 @@ grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_5poiv")
 
-[node name="category_4" type="Panel" parent="INTERFACE/home/categories/container" unique_id=343908359]
-layout_mode = 1
-anchors_preset = -1
+[node name="category_4" type="Panel" parent="INTERFACE/home/categories/container" unique_id=222786443]
+layout_mode = 0
 anchor_left = 0.75
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -7,8 +7,14 @@ class_name CustomVerticalContainer
 		spacing = value
 		update_layout()
 
-func _notification(_what):
-	update_layout()
+func _ready() -> void:
+	child_entered_tree.connect(func(_c):
+		call_deferred("update_layout")
+	)
+	
+	child_exiting_tree.connect(func(_c):
+		call_deferred("update_layout")
+	)
 
 func update_layout() -> void:
 	var y := 0.0

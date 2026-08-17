@@ -11,9 +11,11 @@ class_name CategoryHandler
 @export var categories:Array = []
 
 # internal
+signal active
 var updated:bool = false
 var places:Dictionary = {
 	# "filename" : {
+	#		"name" : name or place key in internal places table
 	#		"scene" : scene file,
 	#		"category" : category string
 	#	}
@@ -24,7 +26,6 @@ var places:Dictionary = {
 # wait for updated
 func _ready() -> void:
 	await %DataHandler.assetUpdated
-	updated = true
 	
 	# get categories from Categories subfolder in Assets
 	var catFol := "user://Assets/Categories"
@@ -57,12 +58,16 @@ func _ready() -> void:
 					
 					if scene:
 						var place := {
+							"name" : p_name.get_basename(),
 							"scene" : scene,
 							"category" : cat,
 						}
 						places.set(p_name.get_basename(),place)
 				p_name = dir.get_next()
 			dir.list_dir_end()
+	
+	updated = true
+	active.emit()
 
 # get place from category (buildings , rooms , offices , facilities)
 func get_p_from_cat(category:String,p_file_name:String):
