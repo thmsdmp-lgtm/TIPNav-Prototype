@@ -4,5 +4,5 @@ extends Node
 
 func _ready() -> void:
 	await %DataHandler.assetUpdated
-	var places = %CategoryHandler.get_random_p()
-	print(places)
+	var place = %CategoryHandler.get_all_p_from_cat("buildings")
+	print(place)
