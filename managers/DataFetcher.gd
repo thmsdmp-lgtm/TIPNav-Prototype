@@ -15,10 +15,10 @@ func _ready() -> void:
 	httpRequest.request_completed.connect(req_success)
 	
 	# wipe old assets / data if found
-	# delete_user_folder("user://Assets")
+	delete_user_folder("user://Assets")
 	
 	# get updated assets / data
-	# request_data()
+	request_data()
 
 func request_data():
 	var err = httpRequest.request(repoUrl)

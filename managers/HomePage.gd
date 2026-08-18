@@ -11,7 +11,7 @@ class_name HomePage
 var cat_templ_scene:PackedScene
 
 func _ready() -> void:
-	#await %PlaceProvider.active
+	await %PlaceProvider.active
 	
 	# load shit
 	cat_templ_scene = load(category_template) as PackedScene

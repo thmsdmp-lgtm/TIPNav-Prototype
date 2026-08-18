@@ -46,7 +46,7 @@ var places:Dictionary = {
 
 # construct data
 func _ready() -> void:
-	# await %DataManager.assetUpdated
+	await %DataManager.assetUpdated
 	
 	# get categories from Categories subfolder in Assets
 	var path := "user://Assets/Categories"
