@@ -4,7 +4,7 @@
 #--------------------------------------#
 
 extends Node
-class_name DataHandler
+class_name DataFetcher
 
 @export var httpRequest:HTTPRequest
 var repoUrl = "https://github.com/thmsdmp-lgtm/TIPNav-Assets/archive/refs/heads/main.zip"

@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://dml52adlhpyrb"]
+
+[ext_resource type="FontFile" uid="uid://bsh68qhhhwf4j" path="res://assets/fonts/arial/ARIBLK.TTF" id="1_j4vm1"]
+[ext_resource type="FontFile" uid="uid://oxx6clp5trya" path="res://assets/fonts/arial/ArialCE.ttf" id="2_6am4t"]
+[ext_resource type="FontFile" uid="uid://b32frou57r1ts" path="res://assets/fonts/arial/ARIALBD.TTF" id="3_t4h84"]
+[ext_resource type="FontFile" uid="uid://qlxe1hwq1kb" path="res://assets/fonts/arial/ARIALLGT.TTF" id="4_a4d54"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgi5k"]
+bg_color = Color(0.92941177, 0.92941177, 0.9137255, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fv21b"]
+bg_color = Color(0.6392157, 0.69411767, 0.5411765, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tel4y"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6392157, 0.69411767, 0.5411765, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqmmt"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.5804985, 0.63546556, 0.48106325, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc10j"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6392157, 0.69411767, 0.5411765, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 10
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkpxi"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.5803922, 0.63529414, 0.48235294, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 10
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5q0nq"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6392157, 0.69411767, 0.5411765, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 10
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 5
+
+[node name="about" type="Control" unique_id=839002101]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="bg1" type="Panel" parent="." unique_id=1876884021]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dgi5k")
+metadata/_edit_use_anchors_ = true
+
+[node name="preview_images" type="Panel" parent="." unique_id=344426970]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.35
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fv21b")
+metadata/_edit_use_anchors_ = true
+
+[node name="title" type="Label" parent="." unique_id=227309146]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.36
+anchor_right = 0.5
+anchor_bottom = 0.44
+theme_override_colors/font_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_fonts/font = ExtResource("1_j4vm1")
+theme_override_font_sizes/font_size = 55
+text = "PLACE NAME"
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="body" type="Label" parent="." unique_id=1751642227]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.45
+anchor_right = 0.95
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_constants/line_spacing = 20
+theme_override_fonts/font = ExtResource("2_6am4t")
+theme_override_font_sizes/font_size = 30
+text = "This is a placeholder description for this location. Here, you can find important information about the place, including its purpose, available services, and other details that may be useful to students, faculty, and visitors. Additional information such as operating hours, room numbers, directions, and contact details can be added here.
+
+This is a placeholder description for this location. Here, you can find important information about the place, including its purpose, available services, and other details that may be useful to students, faculty, and visitors. Additional information such as operating hours, room numbers, directions, and contact details can be added here.
+
+This is a placeholder description for this location. Here, you can find important information about the place, including its purpose, available services, and other details that may be useful to students, faculty, and visitors. Additional information such as operating hours, room numbers, directions, and contact details can be added here.
+"
+autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="back_button" type="Button" parent="." unique_id=462386019]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.024074074
+anchor_top = 0.011428571
+anchor_right = 0.13148148
+anchor_bottom = 0.06380952
+theme_override_colors/font_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_colors/font_focus_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_colors/font_pressed_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_colors/font_hover_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_fonts/font = ExtResource("3_t4h84")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_tel4y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gqmmt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tel4y")
+text = "<"
+metadata/_edit_use_anchors_ = true
+
+[node name="goto_button" type="Button" parent="." unique_id=695539435]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.36
+anchor_right = 0.95
+anchor_bottom = 0.41
+theme_override_colors/font_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_colors/font_focus_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_colors/font_pressed_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_colors/font_hover_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_fonts/font = ExtResource("4_a4d54")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_yc10j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qkpxi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5q0nq")
+text = "See on map"
+metadata/_edit_use_anchors_ = true

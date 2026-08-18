@@ -1,20 +1,19 @@
 [gd_scene format=3 uid="uid://bta4ob2u1655v"]
 
-[ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://classes/gps_manager.gd" id="1_tefeu"]
+[ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://classes/GpsManager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://c18v6ws2r5hoe" path="res://scripts/user_controller.gd" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://cflm6pmpd1jk" path="res://scripts/cam_controller.gd" id="3_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cwylop8ncukfd" path="res://textures/grid.png" id="4_tbgi4"]
 [ext_resource type="ArrayOccluder3D" uid="uid://bfahdctait3nm" path="res://assets/main.occ" id="6_tefeu"]
-[ext_resource type="Script" uid="uid://d84embcky152" path="res://classes/home_class.gd" id="6_trceg"]
-[ext_resource type="Script" uid="uid://drjgljjlwdeka" path="res://test_category_handler.gd" id="9_muem4"]
-[ext_resource type="Script" uid="uid://vk2bf4xp2roa" path="res://classes/custom_Hscroll_container.gd" id="10_muem4"]
-[ext_resource type="Script" uid="uid://dg1kok5ovexo1" path="res://classes/map_class.gd" id="11_jkv2x"]
-[ext_resource type="Script" uid="uid://cpjy1g1oinbh8" path="res://classes/custom_column_container.gd" id="11_ya4ey"]
-[ext_resource type="Script" uid="uid://be6d4ddxckiyp" path="res://classes/tab_handler.gd" id="12_eb6dy"]
+[ext_resource type="Script" uid="uid://d84embcky152" path="res://classes/HomePage.gd" id="6_trceg"]
+[ext_resource type="Script" uid="uid://vk2bf4xp2roa" path="res://custom_scripts/custom_Hscroll_container.gd" id="10_muem4"]
+[ext_resource type="Script" uid="uid://dg1kok5ovexo1" path="res://classes/MapPage.gd" id="11_jkv2x"]
+[ext_resource type="Script" uid="uid://cpjy1g1oinbh8" path="res://custom_scripts/custom_column_container.gd" id="11_ya4ey"]
+[ext_resource type="Script" uid="uid://be6d4ddxckiyp" path="res://classes/TabManager.gd" id="12_eb6dy"]
 [ext_resource type="Script" uid="uid://d35u4274k7ub6" path="res://scripts/info_visualizer.gd" id="17_0ld40"]
-[ext_resource type="Script" uid="uid://sxn578bul5b1" path="res://classes/data_fetcher.gd" id="20_gqmmt"]
-[ext_resource type="Script" uid="uid://dierobtvcylrr" path="res://classes/category_class.gd" id="20_y6deb"]
-[ext_resource type="Script" uid="uid://chsqgbsf1outx" path="res://classes/svg_to_control.gd" id="22_jscy8"]
+[ext_resource type="Script" uid="uid://sxn578bul5b1" path="res://classes/DataFetcher.gd" id="20_gqmmt"]
+[ext_resource type="Script" uid="uid://dierobtvcylrr" path="res://classes/PlaceManager.gd" id="20_y6deb"]
+[ext_resource type="FontFile" uid="uid://qlxe1hwq1kb" path="res://assets/fonts/arial/ARIALLGT.TTF" id="21_yc10j"]
 [ext_resource type="Texture2D" uid="uid://cufknuy720up0" path="res://assets/ui_icons/search icon.png" id="22_pm3ni"]
 [ext_resource type="Texture2D" uid="uid://bipmk3acbn4vh" path="res://icon.svg" id="23_y6deb"]
 
@@ -87,29 +86,6 @@ bg_color = Color(0.92941177, 0.92941177, 0.9137255, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pibwh"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 70
-corner_radius_top_right = 70
-corner_radius_bottom_right = 70
-corner_radius_bottom_left = 70
-shadow_color = Color(0, 0, 0, 0.09019608)
-shadow_size = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jscy8"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chjal"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6deb"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 100
@@ -136,6 +112,41 @@ corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 shadow_color = Color(0, 0, 0, 0.09019608)
 shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pibwh"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 70
+corner_radius_top_right = 70
+corner_radius_bottom_right = 70
+corner_radius_bottom_left = 70
+shadow_color = Color(0, 0, 0, 0.09019608)
+shadow_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jscy8"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chjal"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dp3eg"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="Main" type="Node" unique_id=1886722283]
 metadata/_edit_vertical_guides_ = [-95.0]
@@ -188,7 +199,7 @@ occluder = ExtResource("6_tefeu")
 unique_name_in_owner = true
 script = ExtResource("1_tefeu")
 
-[node name="TabHandler" type="Node" parent="CLASSES" unique_id=1539584182 node_paths=PackedStringArray("user_interface", "tab_buttons", "home_tab", "map_tab", "current_tab")]
+[node name="TabManager" type="Node" parent="CLASSES" unique_id=1539584182 node_paths=PackedStringArray("user_interface", "tab_buttons", "home_tab", "map_tab", "current_tab")]
 unique_name_in_owner = true
 script = ExtResource("12_eb6dy")
 user_interface = NodePath("../../INTERFACE")
@@ -197,25 +208,20 @@ home_tab = NodePath("../../INTERFACE/home")
 map_tab = NodePath("../../INTERFACE/map")
 current_tab = NodePath("../../INTERFACE/home")
 
-[node name="DataHandler" type="Node" parent="CLASSES" unique_id=159427368 node_paths=PackedStringArray("httpRequest")]
+[node name="DataManager" type="Node" parent="CLASSES" unique_id=159427368 node_paths=PackedStringArray("httpRequest")]
 unique_name_in_owner = true
 script = ExtResource("20_gqmmt")
 httpRequest = NodePath("HTTPRequest")
 metadata/_custom_type_script = "uid://sxn578bul5b1"
 
-[node name="HTTPRequest" type="HTTPRequest" parent="CLASSES/DataHandler" unique_id=1289586113]
+[node name="HTTPRequest" type="HTTPRequest" parent="CLASSES/DataManager" unique_id=1289586113]
 
-[node name="CategoryHandler" type="Node" parent="CLASSES" unique_id=2060220332]
+[node name="PlaceManager" type="Node" parent="CLASSES" unique_id=2060220332]
 unique_name_in_owner = true
 script = ExtResource("20_y6deb")
 metadata/_custom_type_script = "uid://dierobtvcylrr"
 
-[node name="testCategoryHandler" type="Node" parent="CLASSES" unique_id=990857896]
-script = ExtResource("9_muem4")
-
 [node name="INTERFACE" type="CanvasLayer" parent="." unique_id=407465981]
-script = ExtResource("22_jscy8")
-svg_path = "uid://bwd6i5nee41xo"
 
 [node name="home" type="Control" parent="INTERFACE" unique_id=1557303284 node_paths=PackedStringArray("category_Container", "suggested_Container_1", "suggested_Container_2")]
 layout_mode = 3
@@ -854,48 +860,6 @@ mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_vxglm")
 metadata/_edit_use_anchors_ = true
 
-[node name="search" type="Panel" parent="INTERFACE" unique_id=1810641963]
-anchors_preset = -1
-anchor_left = 0.05851853
-anchor_top = 0.029800009
-anchor_right = 0.94147223
-anchor_bottom = 0.09828573
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_pibwh")
-
-[node name="LineEdit" type="LineEdit" parent="INTERFACE/search" unique_id=949849433]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.12982517
-anchor_top = 0.2
-anchor_right = 0.95000005
-anchor_bottom = 0.8
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.18000466, 0.18000504, 0.18000469, 1)
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_jscy8")
-theme_override_styles/focus = SubResource("StyleBoxFlat_chjal")
-placeholder_text = "where to?"
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureButton" type="TextureButton" parent="INTERFACE/search" unique_id=147335096]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.045931675
-anchor_top = 0.28104562
-anchor_right = 0.111997806
-anchor_bottom = 0.7435086
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("22_pm3ni")
-texture_pressed = ExtResource("23_y6deb")
-ignore_texture_size = true
-stretch_mode = 4
-metadata/_edit_use_anchors_ = true
-
 [node name="Label" type="Label" parent="INTERFACE" unique_id=1711249648]
 offset_left = 3.0
 offset_right = 343.0
@@ -948,3 +912,100 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_yq6so")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y6deb")
 theme_override_styles/focus = SubResource("StyleBoxFlat_y6deb")
 metadata/_edit_use_anchors_ = true
+
+[node name="search" type="Panel" parent="INTERFACE" unique_id=1810641963]
+anchors_preset = -1
+anchor_left = 0.05851853
+anchor_top = 0.029800009
+anchor_right = 0.94147223
+anchor_bottom = 0.09828573
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pibwh")
+
+[node name="LineEdit" type="LineEdit" parent="INTERFACE/search" unique_id=949849433]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.12982517
+anchor_top = 0.2
+anchor_right = 0.95000005
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.18000466, 0.18000504, 0.18000469, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_jscy8")
+theme_override_styles/focus = SubResource("StyleBoxFlat_chjal")
+placeholder_text = "where to?"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton" type="TextureButton" parent="INTERFACE/search" unique_id=147335096]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.045931675
+anchor_top = 0.28104562
+anchor_right = 0.111997806
+anchor_bottom = 0.7435086
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("22_pm3ni")
+texture_pressed = ExtResource("23_y6deb")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="error" type="Control" parent="INTERFACE" unique_id=1789544797]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="INTERFACE/error" unique_id=1968349892]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dp3eg")
+
+[node name="Label" type="Label" parent="INTERFACE/error/Panel" unique_id=615979002]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.4
+anchor_right = 0.9
+anchor_bottom = 0.5
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_font_sizes/font_size = 86
+text = "FATAL EXCEPTION"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="INTERFACE/error/Panel" unique_id=1823127746]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.4
+anchor_right = 0.9
+anchor_bottom = 0.5
+offset_top = 99.0
+offset_right = 40.0
+offset_bottom = 115.0
+theme_override_colors/font_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_fonts/font = ExtResource("21_yc10j")
+theme_override_font_sizes/font_size = 60
+text = "please refresh page"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+uppercase = true
