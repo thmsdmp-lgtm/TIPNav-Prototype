@@ -15,9 +15,12 @@ func _ready() -> void:
 	httpRequest.request_completed.connect(req_success)
 	
 	# wipe old assets / data if found
-	delete_user_folder("user://Assets")
+	# delete_user_folder("user://Assets")
 	
 	# get updated assets / data
+	# request_data()
+
+func request_data():
 	var err = httpRequest.request(repoUrl)
 	if err != OK:
 		print("Failed to fetch asset")
@@ -25,6 +28,8 @@ func _ready() -> void:
 func req_success(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	if result != HTTPRequest.RESULT_SUCCESS or response_code != 200:
 		print("Download failed with HTTP response code: ", response_code)
+		print("Requesting again..")
+		request_data()
 		return
 	print("downloaded updated assets")
 	

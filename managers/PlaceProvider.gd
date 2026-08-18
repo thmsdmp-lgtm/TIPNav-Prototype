@@ -1,15 +1,34 @@
-# Category class for handling categories and classes
-# returns an array containing the scene and category of the place
-# instantiate scene using .instantiate() then .add_child()
+# Category class for handling categories and places
+
+#--------------------------------------#
+
+#place
+#- a dictionary containing information about a certain place
+#
+#get_panel()
+#- returns an instantiated scene of the panel, only need to
+#.add_child(panel) when called
+#
+#get_about()
+#- returns an instantiated scene of the about page, only need to
+#.add_child(panel) when called
+#
+#get_p(p_file_name:String)
+#- returns a place with the same name as p_file_name
+#
+#get_random_p():
+#- returns a random place
+#
+#get_all_p_from_cat(category:String)
+#- returns a dictionary of places with the same category
 
 #--------------------------------------#
 
 extends Node
-class_name PlaceManager
+class_name PlaceProvider
 
 # internal
-const  about_path := "user://Assets/Categories/about"
-const panels_path := "user://Assets/Categories/panels"
+@export_file_path("*.gd") var PlaceManager
 
 signal active
 var updated:bool = false
@@ -25,9 +44,9 @@ var places:Dictionary = {
 
 #--------------------------------------#
 
-# wait for updated
+# construct data
 func _ready() -> void:
-	await %DataManager.assetUpdated
+	# await %DataManager.assetUpdated
 	
 	# get categories from Categories subfolder in Assets
 	var path := "user://Assets/Categories"
@@ -73,6 +92,39 @@ func _ready() -> void:
 	updated = true
 	active.emit()
 
+# get panel from place, then attach script
+func get_panel(place:Dictionary):
+	if not PlaceManager:
+		print("CANNOT FETCH AND SETUP, PLEASE SET PLACE MANAGER FOR PLACEPROVIDER")
+	if !updated:
+		print("WAIT FOR ASSET-UPDATED SIGNAL BEFORE CALLING CLASS")
+		return
+	if place.is_empty():
+		print("COULD NOT FETCH AND SETUP PANEL, TABLE EMPTY")
+		return
+	if not place: return
+	
+	var panel = place.panel_scene
+	panel = panel.instantiate()
+	panel.set_script(load(PlaceManager))
+	panel.data = place.duplicate(true)
+	return panel
+
+# get panel from place. (about page transition will be handled
+# by another script which is instantiated by the panel script)
+func get_about(place:Dictionary):
+	if !updated:
+		print("WAIT FOR ASSET-UPDATED SIGNAL BEFORE CALLING CLASS")
+		return
+	if place.is_empty():
+		print("COULD NOT FETCH ABOUT, TABLE EMPTY")
+		return
+	if not place: return
+	
+	var about = place.panel_scene
+	about = about.instantiate()
+	return about
+
 # get place from category (buildings , rooms , offices , facilities)
 func get_p_from_cat(category:String,p_file_name:String):
 	if !updated:
@@ -89,7 +141,7 @@ func get_p_from_cat(category:String,p_file_name:String):
 	return
 
 # get all place from a category
-# returns an array, "name" : scene
+# returns an array
 func get_all_p_from_cat(category:String):
 	if !updated:
 		print("WAIT FOR ASSET-UPDATED SIGNAL BEFORE CALLING CLASS")
@@ -106,7 +158,6 @@ func get_all_p_from_cat(category:String):
 		if places[p_name]["category"] == category:
 			final_p.set(p_name,places[p_name]["panel_scene"])
 	return final_p
-
 
 # get place from file name
 func get_p(p_file_name:String):

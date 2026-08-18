@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://bta4ob2u1655v"]
 
-[ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://classes/GpsManager.gd" id="1_tefeu"]
+[ext_resource type="Script" uid="uid://4bchc6lk3cen" path="res://managers/GpsManager.gd" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://c18v6ws2r5hoe" path="res://scripts/user_controller.gd" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://cflm6pmpd1jk" path="res://scripts/cam_controller.gd" id="3_tefeu"]
 [ext_resource type="Texture2D" uid="uid://cwylop8ncukfd" path="res://textures/grid.png" id="4_tbgi4"]
 [ext_resource type="ArrayOccluder3D" uid="uid://bfahdctait3nm" path="res://assets/main.occ" id="6_tefeu"]
-[ext_resource type="Script" uid="uid://d84embcky152" path="res://classes/HomePage.gd" id="6_trceg"]
+[ext_resource type="Script" uid="uid://d84embcky152" path="res://managers/HomePage.gd" id="6_trceg"]
 [ext_resource type="Script" uid="uid://vk2bf4xp2roa" path="res://custom_scripts/custom_Hscroll_container.gd" id="10_muem4"]
-[ext_resource type="Script" uid="uid://dg1kok5ovexo1" path="res://classes/MapPage.gd" id="11_jkv2x"]
+[ext_resource type="Script" uid="uid://dg1kok5ovexo1" path="res://managers/MapPage.gd" id="11_jkv2x"]
 [ext_resource type="Script" uid="uid://cpjy1g1oinbh8" path="res://custom_scripts/custom_column_container.gd" id="11_ya4ey"]
-[ext_resource type="Script" uid="uid://be6d4ddxckiyp" path="res://classes/TabManager.gd" id="12_eb6dy"]
+[ext_resource type="Script" uid="uid://be6d4ddxckiyp" path="res://managers/TabManager.gd" id="12_eb6dy"]
 [ext_resource type="Script" uid="uid://d35u4274k7ub6" path="res://scripts/info_visualizer.gd" id="17_0ld40"]
-[ext_resource type="Script" uid="uid://sxn578bul5b1" path="res://classes/DataFetcher.gd" id="20_gqmmt"]
-[ext_resource type="Script" uid="uid://dierobtvcylrr" path="res://classes/PlaceManager.gd" id="20_y6deb"]
+[ext_resource type="Script" uid="uid://sxn578bul5b1" path="res://managers/DataFetcher.gd" id="20_gqmmt"]
+[ext_resource type="Script" uid="uid://dierobtvcylrr" path="res://managers/PlaceProvider.gd" id="20_y6deb"]
 [ext_resource type="FontFile" uid="uid://qlxe1hwq1kb" path="res://assets/fonts/arial/ARIALLGT.TTF" id="21_yc10j"]
 [ext_resource type="Texture2D" uid="uid://cufknuy720up0" path="res://assets/ui_icons/search icon.png" id="22_pm3ni"]
 [ext_resource type="Texture2D" uid="uid://bipmk3acbn4vh" path="res://icon.svg" id="23_y6deb"]
@@ -212,16 +212,16 @@ current_tab = NodePath("../../INTERFACE/home")
 unique_name_in_owner = true
 script = ExtResource("20_gqmmt")
 httpRequest = NodePath("HTTPRequest")
-metadata/_custom_type_script = "uid://sxn578bul5b1"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="CLASSES/DataManager" unique_id=1289586113]
 
-[node name="PlaceManager" type="Node" parent="CLASSES" unique_id=2060220332]
+[node name="PlaceProvider" type="Node" parent="CLASSES" unique_id=2060220332]
 unique_name_in_owner = true
 script = ExtResource("20_y6deb")
-metadata/_custom_type_script = "uid://dierobtvcylrr"
+PlaceManager = "res://managers/PlaceManager.gd"
 
 [node name="INTERFACE" type="CanvasLayer" parent="." unique_id=407465981]
+unique_name_in_owner = true
 
 [node name="home" type="Control" parent="INTERFACE" unique_id=1557303284 node_paths=PackedStringArray("category_Container", "suggested_Container_1", "suggested_Container_2")]
 layout_mode = 3
