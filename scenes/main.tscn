@@ -149,7 +149,6 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="Main" type="Node" unique_id=1886722283]
-metadata/_edit_vertical_guides_ = [-95.0]
 
 [node name="SCENE" type="Node3D" parent="." unique_id=1800848481]
 
