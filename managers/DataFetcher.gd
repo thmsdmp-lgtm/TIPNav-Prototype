@@ -12,6 +12,9 @@ signal assetUpdated
 
 
 func _ready() -> void:
+	if not httpRequest:
+		print("DATAFETCHER: HTTPREQUEST INSTANCE MISSING")
+	
 	# connections
 	httpRequest.request_completed.connect(req_success)
 	
