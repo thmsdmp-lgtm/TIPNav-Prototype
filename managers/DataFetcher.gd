@@ -10,7 +10,6 @@ extends Node
 var repoUrl = "https://raw.githubusercontent.com/thmsdmp-lgtm/TIPNav-Assets/refs/heads/main/data/assets.tscn"
 signal assetUpdated
 
-
 func _ready() -> void:
 	if not httpRequest:
 		print("DATAFETCHER: HTTPREQUEST INSTANCE MISSING")
