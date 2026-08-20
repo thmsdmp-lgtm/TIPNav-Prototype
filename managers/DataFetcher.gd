@@ -8,7 +8,6 @@ extends Node
 @export var httpRequest: HTTPRequest
 
 var repoUrl = "https://raw.githubusercontent.com/thmsdmp-lgtm/TIPNav-Assets/refs/heads/main/data/assets.tscn"
-
 signal assetUpdated
 
 
@@ -16,10 +15,10 @@ func _ready() -> void:
 	# connections
 	httpRequest.request_completed.connect(req_success)
 	
-	# wipe old assets / data if found
-	delete_user_folder("user://Assets")
+	# delete old assets/data
+	delete_old_assets()
 	
-	# get updated assets / data
+	# get updated assets/data
 	request_data()
 
 
@@ -44,18 +43,8 @@ func req_success(
 	
 	print("Downloaded updated assets")
 	
-	# Create Assets folder
-	var folder_path := "user://Assets"
-	
-	if !DirAccess.dir_exists_absolute(folder_path):
-		var dir_err := DirAccess.make_dir_recursive_absolute(folder_path)
-		
-		if dir_err != OK:
-			print("Failed to create Assets folder: ", dir_err)
-			return
-	
-	# Save the downloaded TSCN
-	var asset_path := "user://Assets/assets.tscn"
+	# Save the downloaded TSCN directly in user://
+	var asset_path := "user://assets.tscn"
 	var file := FileAccess.open(asset_path, FileAccess.WRITE)
 	
 	if file == null:
@@ -70,29 +59,16 @@ func req_success(
 	# Fire updated signal
 	assetUpdated.emit()
 
-func delete_user_folder(path: String) -> void:
-	var full_path = path
 
-	if DirAccess.dir_exists_absolute(full_path):
-		_delete_dir_recursive(full_path)
-		print("Folder successfully deleted: ", full_path)
+func delete_old_assets() -> void:
+	var asset_path := "user://assets.tscn"
+	
+	if FileAccess.file_exists(asset_path):
+		var err := DirAccess.remove_absolute(asset_path)
+		
+		if err == OK:
+			print("Old assets.tscn deleted")
+		else:
+			print("Failed to delete old assets.tscn. Error code: ", err)
 	else:
-		print("Folder does not exist: ", full_path)
-
-func _delete_dir_recursive(path: String) -> void:
-	var dir = DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-
-		while file_name != "":
-			if file_name != "." and file_name != "..":
-				var item_path = path.path_join(file_name)
-				if dir.current_is_dir():
-					_delete_dir_recursive(item_path) # Recurse into subfolder
-				else:
-					DirAccess.remove_absolute(item_path) # Remove file
-			file_name = dir.get_next()
-
-		dir.list_dir_end()
-		DirAccess.remove_absolute(path) # Remove the now-empty folder
+		print("No old assets.tscn found")
