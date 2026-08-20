@@ -1,14 +1,16 @@
 # class for fetching assets stored inside
-# a repository
+# a single scene file in a repository
 
 #--------------------------------------#
 
 extends Node
-class_name DataFetcher
 
-@export var httpRequest:HTTPRequest
-var repoUrl = "https://github.com/thmsdmp-lgtm/TIPNav-Assets/archive/refs/heads/main.zip"
+@export var httpRequest: HTTPRequest
+
+var repoUrl = "https://raw.githubusercontent.com/thmsdmp-lgtm/TIPNav-Assets/refs/heads/main/data/assets.tscn"
+
 signal assetUpdated
+
 
 func _ready() -> void:
 	# connections
@@ -20,98 +22,53 @@ func _ready() -> void:
 	# get updated assets / data
 	request_data()
 
-func request_data():
-	var err = httpRequest.request(repoUrl)
-	if err != OK:
-		print("Failed to fetch asset")
 
-func req_success(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
+func request_data() -> void:
+	var err = httpRequest.request(repoUrl)
+	
+	if err != OK:
+		print("Failed to fetch asset: ", err)
+
+
+func req_success(
+	result: int,
+	response_code: int,
+	_headers: PackedStringArray,
+	body: PackedByteArray
+) -> void:
 	if result != HTTPRequest.RESULT_SUCCESS or response_code != 200:
 		print("Download failed with HTTP response code: ", response_code)
 		print("Requesting again..")
 		request_data()
 		return
-	print("downloaded updated assets")
 	
-	# Save as zip file in user:// (browser IndexedDB)
-	var zip_path = "user://updated_assets.zip"
-	var file = FileAccess.open(zip_path, FileAccess.WRITE)
+	print("Downloaded updated assets")
 	
-	if file:
-		file.store_buffer(body)
-		file.close()
-		print("Saved ZIP to: ", zip_path)
+	# Create Assets folder
+	var folder_path := "user://Assets"
 	
-	# extract new assets
-	unpack("user://updated_assets.zip","user://")
-	
-	# rename folder
-	rename_folder("user://TIPNav-Assets-main","user://Assets")
-	
-	# wipe downloaded zip
-	delete_file("user://updated_assets.zip")
-	
-	# print new contents
-	#print_user_dir_contents("user://Assets")
-	
-	# fire updated signal
-	assetUpdated.emit()
-
-func unpack(zip_path: String, destination: String = "") -> void:
-	var reader = ZIPReader.new()
-	var err = reader.open(zip_path)
-	if err != OK:
-		print("Failed to open zip file. Error code: ", err)
-		return
-
-	# Base target path inside user://
-	var target_base_path = destination
-
-	var files = reader.get_files()
-	for file_path in files:
-		var destination_path = target_base_path.path_join(file_path)
-
-		# Check if the entry is a directory (ends with '/')
-		if file_path.ends_with("/"):
-			DirAccess.make_dir_recursive_absolute(destination_path)
-			continue
-
-		# Ensure parent folders exist for files inside subdirectories
-		var parent_dir = destination_path.get_base_dir()
-		if not DirAccess.dir_exists_absolute(parent_dir):
-			DirAccess.make_dir_recursive_absolute(parent_dir)
-
-		# Write the extracted file
-		var file_data = reader.read_file(file_path)
-		var file = FileAccess.open(destination_path, FileAccess.WRITE)
-		if file:
-			file.store_buffer(file_data)
-			file.close()
-	
-	reader.close()
-
-func rename_folder(old_path: String, new_path: String) -> void:
-	var err = DirAccess.rename_absolute(old_path, new_path)
-	
-	if err != OK:
-		print("Failed to rename folder. Error code: ", err)
-
-func print_user_dir_contents(path:String) -> void:
-	var dir = DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
+	if !DirAccess.dir_exists_absolute(folder_path):
+		var dir_err := DirAccess.make_dir_recursive_absolute(folder_path)
 		
-		while file_name != "":
-			if dir.current_is_dir():
-				print("[DIR]  user://", file_name)
-			else:
-				print("[FILE] user://", file_name)
-			file_name = dir.get_next()
-			
-		dir.list_dir_end()
-	else:
-		print("Failed to open user:// directory.")
+		if dir_err != OK:
+			print("Failed to create Assets folder: ", dir_err)
+			return
+	
+	# Save the downloaded TSCN
+	var asset_path := "user://Assets/assets.tscn"
+	var file := FileAccess.open(asset_path, FileAccess.WRITE)
+	
+	if file == null:
+		print("Failed to save assets.tscn")
+		return
+	
+	file.store_buffer(body)
+	file.close()
+	
+	print("Saved assets to: ", asset_path)
+	
+	# Fire updated signal
+	assetUpdated.emit()
 
 func delete_user_folder(path: String) -> void:
 	var full_path = path
@@ -139,10 +96,3 @@ func _delete_dir_recursive(path: String) -> void:
 
 		dir.list_dir_end()
 		DirAccess.remove_absolute(path) # Remove the now-empty folder
-
-func delete_file(file_path: String) -> void:
-	if FileAccess.file_exists(file_path):
-		DirAccess.remove_absolute(file_path)
-		print("File successfully deleted: ", file_path)
-	else:
-		print("File does not exist: ", file_path)

@@ -208,10 +208,9 @@ home_tab = NodePath("../../INTERFACE/home")
 map_tab = NodePath("../../INTERFACE/map")
 current_tab = NodePath("../../INTERFACE/home")
 
-[node name="DataManager" type="Node" parent="CLASSES" unique_id=159427368 node_paths=PackedStringArray("httpRequest")]
+[node name="DataManager" type="Node" parent="CLASSES" unique_id=159427368]
 unique_name_in_owner = true
 script = ExtResource("20_gqmmt")
-httpRequest = NodePath("HTTPRequest")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="CLASSES/DataManager" unique_id=1289586113]
 
