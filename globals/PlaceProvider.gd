@@ -25,20 +25,20 @@
 #--------------------------------------#
 
 extends Node
-class_name PlaceProvider
 
 # internal
-@export_file_path("*.gd") var PlaceManager
+var PlaceManager = "res://managers/PlaceManager.gd"
 
 signal active
 var updated:bool = false
 var categories:Array = []
+var assets:Control
 var places:Dictionary = {
 	# "name (folder name in asset repo)" : {
 	#		"name" : name or place key in internal places table
 	#		"category" : category string
-	#		"panel_scene" : panel scene file,
-	#		"about_scene" : about scene file
+	#		"panel" : panel scene file,
+	#		"about" : about scene file
 	#	}
 }
 
@@ -46,48 +46,40 @@ var places:Dictionary = {
 
 # construct data
 func _ready() -> void:
-	await %DataManager.assetUpdated
+	await DataFetcher.assetUpdated
 	
-	# get categories from Categories subfolder in Assets
-	var path := "user://Assets/Categories"
-	var dir := DirAccess.open(path)
+	# get assets
+	var scene:PackedScene = load("user://assets.tscn")
+	assets = scene.instantiate()
 	
-	if dir:
-		dir.list_dir_begin()
-		var cat_name = dir.get_next()
+	# construct
+	for child in assets.get_children():
 		
-		while cat_name != "":
-			if dir.current_is_dir():
-				categories.append(cat_name)
-			cat_name = dir.get_next()
-		dir.list_dir_end()
-	
-	# construct place table
-	for cat in categories:
-		var cat_path := "user://Assets/Categories".path_join(cat)
-		var cat_dir := DirAccess.open(cat_path)
-		
-		if cat_dir:
-			cat_dir.list_dir_begin()
-			var place_name := cat_dir.get_next()
+		# get place tree
+		if child.name == "places":
 			
-			while place_name != "":
-				# get panel
-				var panel_path := cat_path.path_join(place_name).path_join("panel.tscn")
-				var panel_scene := load(panel_path) as PackedScene
-				# get about
-				var about_path := cat_path.path_join(place_name).path_join("about.tscn")
-				var about_scene := load(about_path) as PackedScene
+			# loop categories
+			for cat in child.get_children():
 				
-				# construct
-				places.set(place_name,{
-					"name" : place_name,
-					"category" : cat,
-					"panel_scene" : panel_scene,
-					"about_scene" : about_scene,
-				})
-				place_name = cat_dir.get_next()
-			cat_dir.list_dir_end()
+				# store category
+				categories.append(cat.name)
+				
+				# get places
+				for place in cat.get_children():
+					
+					# get info
+					var name:String = place.name
+					var about:Control = place.get_node("about")
+					var panel:Control = place.get_node("panel")
+					if not about or not panel: return
+					
+					# store info
+					places.set(name,{
+						"name":name,
+						"category":cat.name,
+						"panel":panel,
+						"about":about,
+					})
 	
 	updated = true
 	active.emit()
@@ -104,26 +96,15 @@ func get_panel(place:Dictionary):
 		return
 	if not place: return
 	
-	var panel = place.panel_scene
-	panel = panel.instantiate()
+	var panel = place.panel.duplicate()
 	panel.set_script(load(PlaceManager))
-	panel.data = place.duplicate(true)
-	return panel
-
-# get panel from place. (about page transition will be handled
-# by another script which is instantiated by the panel script)
-func get_about(place:Dictionary):
-	if !updated:
-		print("WAIT FOR ASSET-UPDATED SIGNAL BEFORE CALLING CLASS")
-		return
-	if place.is_empty():
-		print("COULD NOT FETCH ABOUT, TABLE EMPTY")
-		return
-	if not place: return
 	
-	var about = place.panel_scene
-	about = about.instantiate()
-	return about
+	var data = place.duplicate(true)
+	data.panel = place.panel.duplicate()
+	data.about = place.about.duplicate()
+	panel.data = data
+	
+	return panel
 
 # get place from category (buildings , rooms , offices , facilities)
 func get_p_from_cat(category:String,p_file_name:String):
@@ -156,7 +137,7 @@ func get_all_p_from_cat(category:String):
 	
 	for p_name in places:
 		if places[p_name]["category"] == category:
-			final_p.set(p_name,places[p_name]["panel_scene"])
+			final_p.set(p_name,places[p_name]["panel"])
 	return final_p
 
 # get place from file name

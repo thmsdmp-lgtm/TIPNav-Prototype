@@ -11,7 +11,7 @@ class_name HomePage
 var cat_templ_scene:PackedScene
 
 func _ready() -> void:
-	await %PlaceProvider.active
+	await PlaceProvider.active
 	
 	# load shit
 	cat_templ_scene = load(category_template) as PackedScene
@@ -34,7 +34,7 @@ func exit():
 func fill_categories():
 	for child in category_Container.get_children():
 		child.queue_free()
-	for cat in %PlaceProvider.categories:
+	for cat in PlaceProvider.categories:
 		var category = cat_templ_scene.instantiate()
 		category.get_node("Label").text = cat
 		category_Container.add_child(category)
@@ -47,10 +47,10 @@ func fill_suggestions():
 	for child:Control in suggested_Container_1.get_children():
 		child.queue_free()
 	for i in 5:
-		var place = %PlaceProvider.get_random_p()
+		var place = PlaceProvider.get_random_p()
 		if not place: continue
 		
-		var place_panel = %PlaceProvider.get_panel(place)
+		var place_panel = PlaceProvider.get_panel(place)
 		if not place_panel: continue
 		suggested_Container_1.add_child(place_panel)
 	
@@ -58,9 +58,9 @@ func fill_suggestions():
 	for child:Control in suggested_Container_2.get_children():
 		child.queue_free()
 	for i in 5:
-		var place = %PlaceProvider.get_random_p()
+		var place = PlaceProvider.get_random_p()
 		if not place: continue
 		
-		var place_panel = %PlaceProvider.get_panel(place)
+		var place_panel = PlaceProvider.get_panel(place)
 		if not place_panel: continue
 		suggested_Container_2.add_child(place_panel)

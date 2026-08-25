@@ -4,14 +4,18 @@
 #--------------------------------------#
 extends Node
 
-@export var httpRequest: HTTPRequest
+var httpRequest: HTTPRequest
 
-var repoUrl = "https://raw.githubusercontent.com/thmsdmp-lgtm/TIPNav-Assets/refs/heads/main/data/assets.tscn"
+var assetURL = "https://raw.githubusercontent.com/thmsdmp-lgtm/TIPNav-Assets/refs/heads/main/data/assets.tscn"
 signal assetUpdated
 
 func _ready() -> void:
 	if not httpRequest:
 		print("DATAFETCHER: HTTPREQUEST INSTANCE MISSING")
+	
+	# create http instance
+	httpRequest = HTTPRequest.new()
+	add_child(httpRequest)
 	
 	# connections
 	httpRequest.request_completed.connect(req_success)
@@ -22,20 +26,21 @@ func _ready() -> void:
 	# get updated assets/data
 	request_data()
 
-
+# request
 func request_data() -> void:
-	var err = httpRequest.request(repoUrl)
+	var err = httpRequest.request(assetURL)
 	
 	if err != OK:
 		print("Failed to fetch asset: ", err)
 
-
+# called func when request responds
 func req_success(
 	result: int,
 	response_code: int,
 	_headers: PackedStringArray,
 	body: PackedByteArray
 ) -> void:
+	
 	if result != HTTPRequest.RESULT_SUCCESS or response_code != 200:
 		print("Download failed with HTTP response code: ", response_code)
 		print("Requesting again..")
@@ -60,7 +65,7 @@ func req_success(
 	# Fire updated signal
 	assetUpdated.emit()
 
-
+# delete old assets
 func delete_old_assets() -> void:
 	var asset_path := "user://assets.tscn"
 	

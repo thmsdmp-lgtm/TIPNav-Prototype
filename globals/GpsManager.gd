@@ -11,7 +11,6 @@
 # -stop monitoring positional changes
 
 extends Node
-class_name GpsManager
 
 # ID returned by watchPosition()
 var _watch_id := -1

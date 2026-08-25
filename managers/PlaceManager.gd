@@ -1,4 +1,4 @@
-#handle place panel inputs
+# handle place panel inputs
 extends Control
 
 #--------------------------------------#
@@ -22,6 +22,8 @@ var pressing := false
 
 # setup
 func _ready() -> void:
+	await get_tree().process_frame
+	
 	if data.is_empty():
 		print("PLACEMANAGER DATA EMPTY")
 		return
@@ -79,13 +81,13 @@ func handle_about(state:bool):
 	if state: # enter about
 		if about: return
 		
-		about = data.about_scene
+		about = data.about
 		
 		if not about:
 			print("PLACE DOES NOT HAVE ABOUT PAGE")
 			return
 		
-		about = about.instantiate()
+		about = about.duplicate()
 		about.pivot_offset_ratio = Vector2(.5,.5)
 		about.scale = Vector2.ZERO
 		about.modulate.a = 0.0
