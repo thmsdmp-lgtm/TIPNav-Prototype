@@ -27,18 +27,18 @@ func update_layout() -> void:
 	if count == 0:
 		return
 
-	var cell_width := 1.0 / count
+	var cell_height := 1.0 / count
 
 	for i in range(count):
 		var child := children[i]
 
 		child.visible = true
 
-		# Stretch each child equally across the width
-		child.anchor_left = i * cell_width
-		child.anchor_right = (i + 1) * cell_width
-		child.anchor_top = 0.0
-		child.anchor_bottom = 1.0
+		# Stretch each child equally across the height
+		child.anchor_top = i * cell_height
+		child.anchor_bottom = (i + 1) * cell_height
+		child.anchor_left = 0.0
+		child.anchor_right = 1.0
 
 		child.offset_left = spacing * 0.5
 		child.offset_right = -spacing * 0.5
