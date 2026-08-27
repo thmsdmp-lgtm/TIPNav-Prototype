@@ -160,10 +160,10 @@ bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trceg"]
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8y0u"]
 bg_color = Color(0.973535, 0.9735351, 0.973535, 1)
@@ -188,6 +188,11 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pb5xr"]
 bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.65882355, 0.65882355, 0.65882355, 1)
 corner_radius_top_left = 70
 corner_radius_top_right = 70
 corner_radius_bottom_right = 70
@@ -1262,7 +1267,7 @@ vertical_alignment = 2
 
 [node name="categories" type="Control" parent="INTERFACE2/tab" unique_id=816910799 node_paths=PackedStringArray("ChildContainer")]
 layout_mode = 1
-anchor_top = -0.63372105
+anchor_top = -0.6976746
 anchor_right = 1.0
 anchor_bottom = -0.0051020244
 grow_horizontal = 2
@@ -1352,11 +1357,12 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_jbj1t")
 text = "Category"
 
 [node name="location_button" type="TextureButton" parent="INTERFACE2/tab" unique_id=1753881053]
-layout_mode = 0
-anchor_left = 0.8138889
-anchor_top = -1.6220931
-anchor_right = 0.9611111
-anchor_bottom = -0.7906977
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82685184
+anchor_top = -1.8023256
+anchor_right = 0.97407407
+anchor_bottom = -0.9709302
 texture_normal = ExtResource("14_a8y0u")
 texture_pressed = ExtResource("15_jkv2x")
 texture_hover = ExtResource("14_a8y0u")
